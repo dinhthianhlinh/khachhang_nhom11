@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    <item android:id="@+id/quanLyKhachHang"-->
+<!--        android:title=""-->
+<!--        android:icon="@drawable/one"/>-->
+
+    <item android:id="@+id/quanLySanPham"
+        android:icon="@drawable/two"
+        android:title="Sản Phẩm "/>
+    <item android:id="@+id/thongKe"
+        android:icon="@drawable/three"
+        android:title="Thống Kê"/>
+
+<!--    <item android:id="@+id/quanLyDonHang"-->
+<!--        android:icon="@drawable/four"-->
+<!--        android:title="Quản Lý Đơn Hàng"/>-->
+
+<!--    <item android:id="@+id/quanLyDanhSach"-->
+<!--        android:icon="@drawable/five"-->
+<!--        android:title="Quản Lý Danh Sách Đánh Giá "/>-->
+
+<!--    <item android:id="@+id/quanLyDanhMuc"-->
+<!--        android:icon="@drawable/six"-->
+<!--        android:title="Quản Lý Danh Mục"/>-->
+
+</menu>

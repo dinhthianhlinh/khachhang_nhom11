@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "250561208354",
+    "firebase_url": "https://duan1-md18042-nhom11-default-rtdb.firebaseio.com",
+    "project_id": "duan1-md18042-nhom11",
+    "storage_bucket": "duan1-md18042-nhom11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250561208354:android:c4d861ee62f45a1b566a7b",
+        "android_client_info": {
+          "package_name": "com.example.duan1_nhom1_md18402_khachhang"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1O3r-dotRyaM8W3uOavBMqpv2ea_DETE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250561208354:android:4f51561289360c0d566a7b",
+        "android_client_info": {
+          "package_name": "com.example.khachhang"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1O3r-dotRyaM8W3uOavBMqpv2ea_DETE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250561208354:android:29e44980811744c8566a7b",
+        "android_client_info": {
+          "package_name": "com.example.nhom11_duan1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1O3r-dotRyaM8W3uOavBMqpv2ea_DETE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
