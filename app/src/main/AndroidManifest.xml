@@ -13,11 +13,20 @@
         android:theme="@style/Theme.Khachhang"
         tools:targetApi="31">
         <activity
-            android:name=".HomeActivity"
+            android:name=".GioHangActivity"
             android:exported="false" />
         <activity
-            android:name=".AddSanPhamActivity"
+            android:name=".Thanhtaon"
             android:exported="false" />
+        <activity
+            android:name=".ChiTietSanPhamActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".AddSanPhamActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".trangchumenu"
             android:exported="false" />

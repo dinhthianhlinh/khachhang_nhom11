@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.khachhang.Adapter.SanPhamAdapter;
-import com.example.khachhang.AddSanPhamActivity;
 import com.example.khachhang.DTO.SanPham;
 import com.example.khachhang.R;
 import com.example.khachhang.Utility;
@@ -22,54 +22,72 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.Query;
 
-
 public class fragment_QuanLySanPham extends Fragment {
     FloatingActionButton btnAdd;
     RecyclerView recyclerView;
     SanPhamAdapter sanPhamAdapter;
+    private TextView cartIcon;
+    private int soLuongSanPhamTrongGioHang = 0;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment__quan_ly_san_pham,container,false);
-//        btnAdd = (FloatingActionButton) view.findViewById(R.id.btnAdd);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-//        btnAdd.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), AddSanPhamActivity.class);
-//                getActivity().startActivity(intent);
-//            }
-//        });
-        recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), AddSanPhamActivity.class);
-                getActivity().startActivity(intent);
-            }
-        });
-        Query query = Utility.getCollectionReference().orderBy("timestamp",Query.Direction.ASCENDING);
+        View view = inflater.inflate(R.layout.fragment__quan_ly_san_pham, container, false);
+
+        recyclerView = view.findViewById(R.id.recycler_view);
+        cartIcon = view.findViewById(R.id.cartIcon); // Initialize cartIcon here
+
+        // Initialize and update the shopping cart icon
+        updateCartIcon();
+
+        Query query = Utility.getCollectionReference().orderBy("timestamp", Query.Direction.ASCENDING);
         FirestoreRecyclerOptions<SanPham> options = new FirestoreRecyclerOptions.Builder<SanPham>()
-                .setQuery(query,SanPham.class).build();
+                .setQuery(query, SanPham.class).build();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        sanPhamAdapter = new SanPhamAdapter(options,getContext());
+        sanPhamAdapter = new SanPhamAdapter(options, getContext());
         recyclerView.setAdapter(sanPhamAdapter);
 
         return view;
     }
+
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         sanPhamAdapter.startListening();
     }
+
     @Override
-    public void onStop(){
+    public void onStop() {
         super.onStop();
         sanPhamAdapter.stopListening();
     }
+
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         sanPhamAdapter.notifyDataSetChanged();
     }
+
+    private void themSanPhamVaoGioHang() {
+        soLuongSanPhamTrongGioHang++;
+        updateCartIcon();
+    }
+
+    private void xoaSanPhamKhoiGioHang() {
+        if (soLuongSanPhamTrongGioHang > 0) {
+            soLuongSanPhamTrongGioHang--;
+        }
+        updateCartIcon();
+    }
+
+    private void updateCartIcon() {
+        if (cartIcon != null) {
+            if (soLuongSanPhamTrongGioHang > 0) {
+                cartIcon.setText(String.valueOf(soLuongSanPhamTrongGioHang));
+                cartIcon.setVisibility(View.VISIBLE);
+            } else {
+                cartIcon.setVisibility(View.GONE);
+            }
+        }
+    }
 }
-//123

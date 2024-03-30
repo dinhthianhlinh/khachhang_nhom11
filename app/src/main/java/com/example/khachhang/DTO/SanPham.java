@@ -1,8 +1,12 @@
 package com.example.khachhang.DTO;
 
 import com.google.firebase.Timestamp;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class SanPham {
+import androidx.annotation.NonNull;
+
+public class SanPham implements Parcelable {
     public String tenSP;
     public int giaSP;
     public String hangSP;
@@ -12,12 +16,33 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(String tenSP, String hangSP, String moTaSP) {
+    public SanPham(String tenSP, int giaSP, String hangSP, String moTaSP, Timestamp timestamp) {
         this.tenSP = tenSP;
-//        this.giaSP = giaSP;
+        this.giaSP = giaSP;
         this.hangSP = hangSP;
         this.moTaSP = moTaSP;
+        this.timestamp = timestamp;
     }
+
+    protected SanPham(Parcel in) {
+        tenSP = in.readString();
+        giaSP = in.readInt();
+        hangSP = in.readString();
+        moTaSP = in.readString();
+        timestamp = in.readParcelable(Timestamp.class.getClassLoader());
+    }
+
+    public static final Creator<SanPham> CREATOR = new Creator<SanPham>() {
+        @Override
+        public SanPham createFromParcel(Parcel in) {
+            return new SanPham(in);
+        }
+
+        @Override
+        public SanPham[] newArray(int size) {
+            return new SanPham[size];
+        }
+    };
 
     public String getTenSP() {
         return tenSP;
@@ -57,6 +82,20 @@ public class SanPham {
 
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(tenSP);
+        dest.writeInt(giaSP);
+        dest.writeString(hangSP);
+        dest.writeString(moTaSP);
+        dest.writeParcelable(timestamp, flags);
     }
 }
 
