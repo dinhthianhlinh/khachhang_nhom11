@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Khachhang"
         tools:targetApi="31">
         <activity
+            android:name=".ThanhToanMuaNgayActivity"
+            android:exported="false" />
+        <activity
             android:name=".GioHangActivity"
             android:exported="false" />
         <activity
@@ -23,10 +26,9 @@
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".AddSanPhamActivity"-->
-<!--            android:exported="false" />-->
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".AddSanPhamActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".trangchumenu"
             android:exported="false" />

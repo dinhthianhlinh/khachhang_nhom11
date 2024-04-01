@@ -35,19 +35,19 @@ public class GioHangAdapter extends FirestoreRecyclerAdapter<GioHang, GioHangAda
         holder.soluongSP.setText(model.getSoluongSP());
         holder.giaSP.setText(model.getGiaSP());
 
-        holder.btnCongSoLuong_cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Thêm logic tăng số lượng sản phẩm ở đây
-            }
-        });
-
-        holder.btnTruSoLuong_cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Thêm logic giảm số lượng sản phẩm ở đây
-            }
-        });
+//        holder.btnCongSoLuong_cart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Thêm logic tăng số lượng sản phẩm ở đây
+//            }
+//        });
+//
+//        holder.btnTruSoLuong_cart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Thêm logic giảm số lượng sản phẩm ở đây
+//            }
+//        });
 
 //        holder.imgDel.setOnClickListener(new View.OnClickListener() {
 //            @Override

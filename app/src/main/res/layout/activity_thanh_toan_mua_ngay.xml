@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="10"
-    tools:context=".Thanhtaon">
+    tools:context=".ThanhToanMuaNgayActivity"
+    android:orientation="vertical">
     <LinearLayout
         android:id="@+id/ln_toolbar"
         android:layout_width="match_parent"
@@ -50,12 +49,41 @@
             android:text="Số Nhà 1,Xóm 2,Thôn 3,Xã 4,Huyện 5,Thành Phố 6"
             />
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcSanPhamThanhToan"
+    <TextView
+        android:id="@+id/tvTenSP"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:layout_margin="8dp" />
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/tvHangSP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/tvTenSP"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/tvMoTaSP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/tvHangSP"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/tvGiaSP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/tvMoTaSP"
+        android:layout_marginBottom="8dp"/>
     <TextView
         android:paddingLeft="10dp"
         android:layout_width="wrap_content"
@@ -132,7 +160,7 @@
                     android:text="0"
                     android:textStyle="bold"
                     android:textSize="18dp"
-             />
+                    />
             </LinearLayout>
 
         </LinearLayout>
@@ -153,4 +181,5 @@
                 />
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

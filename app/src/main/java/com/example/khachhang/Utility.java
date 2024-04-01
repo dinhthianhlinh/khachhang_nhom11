@@ -22,4 +22,14 @@ public class Utility{
     public static String timestampToString(Timestamp timestamp){
         return new SimpleDateFormat("MM/dd/yyyy").format(timestamp.toDate());
     }
+    public static CollectionReference ThemSanPhamVaoGiohHang(){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        return FirebaseFirestore.getInstance().collection("Gio Hang 1")
+                .document(firebaseUser.getUid()).collection("Gio Hang Cua Toi");
+    }
+    public static CollectionReference HoaDon(){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        return FirebaseFirestore.getInstance().collection("Hoa Don")
+                .document(firebaseUser.getUid()).collection("HoaDon Cua Toi");
+    }
 }

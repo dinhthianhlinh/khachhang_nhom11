@@ -20,6 +20,7 @@ import com.google.firebase.firestore.Query;
 public class GioHangActivity extends AppCompatActivity {
     private GioHangAdapter adapter;
     private FirebaseFirestore firestore;
+    GioHang gioHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +34,12 @@ public class GioHangActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
 
         // Tạo Query để truy vấn dữ liệu từ Firestore
-        Query query = firestore.collection("your_collection_name"); // Thay "your_collection_name" bằng tên collection chứa dữ liệu GioHang
-
-        // Tạo FirestoreRecyclerOptions từ Query
+        Query query = Utility.ThemSanPhamVaoGiohHang().orderBy("tenSP",Query.Direction.ASCENDING);
         FirestoreRecyclerOptions<GioHang> options = new FirestoreRecyclerOptions.Builder<GioHang>()
-                .setQuery(query, GioHang.class)
-                .build();
+                .setQuery(query,GioHang.class).build();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new GioHangAdapter(options,this);
+        recyclerView.setAdapter(adapter);
 
         // Khởi tạo adapter với FirestoreRecyclerOptions
         adapter = new GioHangAdapter(options, this);
@@ -66,5 +67,10 @@ public class GioHangActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 }
