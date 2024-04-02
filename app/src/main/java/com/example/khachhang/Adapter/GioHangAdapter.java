@@ -32,8 +32,8 @@ public class GioHangAdapter extends FirestoreRecyclerAdapter<GioHang, GioHangAda
     @Override
     protected void onBindViewHolder(@NonNull GioHangViewHolder holder, int position, @NonNull GioHang model) {
         holder.tenSP.setText(model.getTenSP());
-        holder.soluongSP.setText(model.getSoluongSP());
-        holder.giaSP.setText(model.getGiaSP());
+        holder.soluongSP.setText(String.valueOf(model.getSoLuongSP()));
+        holder.giaSP.setText(String.valueOf(model.getGiaSP()));
 
 //        holder.btnCongSoLuong_cart.setOnClickListener(new View.OnClickListener() {
 //            @Override

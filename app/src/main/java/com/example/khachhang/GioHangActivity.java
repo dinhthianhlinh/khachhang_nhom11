@@ -20,7 +20,6 @@ import com.google.firebase.firestore.Query;
 public class GioHangActivity extends AppCompatActivity {
     private GioHangAdapter adapter;
     private FirebaseFirestore firestore;
-    GioHang gioHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
