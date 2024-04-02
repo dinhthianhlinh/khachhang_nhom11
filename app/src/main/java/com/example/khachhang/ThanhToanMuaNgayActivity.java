@@ -31,8 +31,11 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
     ImageView img_backToMain;
     FirebaseFirestore firestore;
     GioHangAdapter adapter;
+    TextView  soluongSP, btnTruSoLuong_cart, btnCongSoLuong_cart,tongTienSP;
 
-     TextView tvTenSP, tvHangSP, tvMoTaSP, tvGiaSP;
+     TextView tvTenSP, tvGiaSP;
+    private int currentQuantity = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,28 +43,18 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_thanh_toan_mua_ngay);
         anhxa();
         firestore = FirebaseFirestore.getInstance();
-
-        tvTenSP = findViewById(R.id.tvTenSP);
-        tvHangSP = findViewById(R.id.tvHangSP);
-        tvMoTaSP = findViewById(R.id.tvMoTaSP);
-        tvGiaSP = findViewById(R.id.tvGiaSP);
-
         Intent intent = getIntent();
         String tenSP = null;
         int giaSP = 0;
-        String hangSP = null;
-        String moTaSP = null;
+        int moTaSP = 1;
         if (intent != null) {
             tenSP = intent.getStringExtra("TEN_SP");
-            hangSP = intent.getStringExtra("HANG_SP");
-            moTaSP = intent.getStringExtra("MOTA_SP");
             giaSP = intent.getIntExtra("GIA_SP", 0);
 
-            if (tenSP != null && hangSP != null && moTaSP != null && giaSP != 0) {
+            if (tenSP != null &&  giaSP != 0) {
                 // Hiển thị thông tin sản phẩm trên giao diện
                 tvTenSP.setText(tenSP);
-                tvHangSP.setText(hangSP);
-                tvMoTaSP.setText(moTaSP);
+                soluongSP.setText(String.valueOf(1));
                 tvGiaSP.setText(String.valueOf(giaSP));
             } else {
                 // Xử lý khi dữ liệu không hợp lệ
@@ -73,7 +66,46 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
             Toast.makeText(this, "Không thể nhận dữ liệu sản phẩm để thanh toán", Toast.LENGTH_SHORT).show();
             finish(); // Kết thúc activity nếu không có Intent
         }
-        HoaDon hoaDon = new HoaDon(tenSP, giaSP, hangSP, moTaSP);
+
+        GioHang model = null ;
+        btnCongSoLuong_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentQuantity = 1;
+
+
+                int currentPrice = Integer.parseInt(tvGiaSP.getText().toString());
+
+                // Tăng số lượng lên 1
+                currentQuantity++;
+
+                // Cập nhật số lượng và tổng tiền mới lên TextViews
+                soluongSP.setText(String.valueOf(currentQuantity));
+                tongTienSP.setText(String.valueOf(currentPrice * currentQuantity));
+                tvTongThanhToanHoaDon.setText(String.valueOf(currentPrice * currentQuantity));
+
+                // Gọi phương thức để trả về giá trị của currentQuantity
+                soLuong(currentQuantity);
+            }
+        });
+
+        btnTruSoLuong_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentQuantity = 1;
+                int currentPrice = Integer.parseInt(tvGiaSP.getText().toString());
+
+                // Giảm số lượng đi 1, nhưng không nhỏ hơn 0
+                currentQuantity = Math.max(0, currentQuantity - 1);
+
+                // Cập nhật số lượng và tổng tiền mới lên TextViews
+                soluongSP.setText(String.valueOf(currentQuantity));
+                tongTienSP.setText(String.valueOf(currentPrice * currentQuantity));
+                tvTongThanhToanHoaDon.setText(String.valueOf(currentPrice * currentQuantity));
+                soLuong(currentQuantity);
+            }
+        });
+        HoaDon hoaDon = new HoaDon(tenSP, giaSP, currentQuantity);
         btnMuaHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,9 +122,24 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
                         }
                     }
                 });
+                DocumentReference documentReference1;
+                documentReference1 = Utility.HoaDon1().document();
+                documentReference1.set(hoaDon).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Utility.showToast(ThanhToanMuaNgayActivity.this, "Mua Hàng Thành Công");
+                            finish();
+                        } else {
+                            Utility.showToast(ThanhToanMuaNgayActivity.this, "Mua Hàng Thất Bại");
+                        }
+                    }
+                });
             }
         });
+
     }
+
 
 
     void anhxa(){
@@ -103,8 +150,17 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
         btnMuaHang = findViewById(R.id.btnMuaHangThanhToan);
         rdBankingThanhToan = findViewById(R.id.rdBankingThanhToan);
         rdNhanHangThanhToan = findViewById(R.id.rdNhanHangThanhToan);
+        btnTruSoLuong_cart = findViewById(R.id.btnTruSoLuong_cart1);
+        btnCongSoLuong_cart = findViewById(R.id.btnCongSoLuong_cart1);
+        tvTenSP = findViewById(R.id.tvTenSP1);
+        tvGiaSP = findViewById(R.id.tvGiaSP1);
+        soluongSP = findViewById(R.id.tvSoLuong1);
+        tongTienSP = findViewById(R.id.tvTongTien1);
     }
-    void muahang(){
+    private void soLuong(int soLuong ){
 
+    }
+    private void setSoLuong(int soLuong){
+        this.currentQuantity = soLuong;
     }
 }

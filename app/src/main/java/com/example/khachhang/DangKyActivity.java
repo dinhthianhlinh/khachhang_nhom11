@@ -13,28 +13,36 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.khachhang.DTO.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class DangKyActivity extends AppCompatActivity {
     Button btnDangKy;
+    TextInputEditText edtPass,edtRePass,edtEmail,edtTen;
+    TextInputLayout txtPass,txtRePass,txtEmail,txtTen;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_ky);
-        TextInputEditText edtPass = findViewById(R.id.edtPass);
-        TextInputLayout txtPass = findViewById(R.id.txtPass);
-        TextInputEditText edtRePass = findViewById(R.id.edtRePass);
-        TextInputLayout txtRePass = findViewById(R.id.txtRePass);
-        TextInputEditText edtEmail = findViewById(R.id.edtEmail);
-        TextInputLayout txtEmail = findViewById(R.id.txtEmail);
+        edtPass = findViewById(R.id.edtPass);
+        txtPass = findViewById(R.id.txtPass);
+        edtRePass = findViewById(R.id.edtRePass);
+        txtRePass = findViewById(R.id.txtRePass);
+        edtEmail = findViewById(R.id.edtEmail);
+        txtEmail = findViewById(R.id.txtEmail);
+        edtTen = findViewById(R.id.edtTen);
+        txtTen = findViewById(R.id.txtTen);
         btnDangKy = findViewById(R.id.btnDangKy);
         TextView tvDangNhap = findViewById(R.id.tvDangNhap);
+        getUserName();
 
         btnDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +50,8 @@ public class DangKyActivity extends AppCompatActivity {
                 String email = edtEmail.getText().toString().trim();
                 String pass = edtPass.getText().toString();
                 String repass = edtRePass.getText().toString();
-                if(pass.equals("") || repass.equals("") || email.equals("")){
+                String ten = edtTen.getText().toString();
+                if(pass.equals("") || repass.equals("") || email.equals("") || ten.equals("")){
 
                     if(pass.equals("")){
                         txtPass.setError("Vui Lòng Nhập Mật Khẩu");
@@ -58,12 +67,32 @@ public class DangKyActivity extends AppCompatActivity {
                         txtEmail.setError("Email không đúng định dạng");
                     }else {
                         txtEmail.setError(null);
+                    }if(ten.equals("")){
+                        txtTen.setError("Vui Lòng Nhập Mật Khẩu");
+                    }else {
+                        txtTen.setError(null);
                     }
                 }else{
 //                    Intent intent = new Intent(DangKyActivity.this,LoginActivity.class);
 //                    startActivity(intent);
                 }
                 createAccountInFireBase(email,pass);
+                changeInprogress(true);
+                if(user!= null){
+                    user.setTen(ten);
+                }else{
+                    user = new User(email,pass,ten);
+                }
+                Utility.CurrentUserDetail().set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        changeInprogress(false);
+                        if(task.isSuccessful()){
+
+                        }
+                    }
+                });
+
             }
         });
         tvDangNhap.setOnClickListener(new View.OnClickListener() {
@@ -171,5 +200,20 @@ public class DangKyActivity extends AppCompatActivity {
         }else{
             btnDangKy.setVisibility(View.VISIBLE);
         }
+    }
+    void getUserName(){
+        changeInprogress(true);
+        Utility.CurrentUserDetail().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                changeInprogress(false);
+                if(task.isSuccessful()){
+                    user = task.getResult().toObject(User.class);
+                    if(user != null){
+                        edtTen.setText(user.getTen());
+                    }
+                }
+            }
+        });
     }
 }

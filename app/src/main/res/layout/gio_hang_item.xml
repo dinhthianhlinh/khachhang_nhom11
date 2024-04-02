@@ -15,31 +15,29 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
-        <ImageView
-            android:id="@+id/eachCartItemIV"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/anhdienthoai" />
+<!--        <ImageView-->
+<!--            android:id="@+id/eachCartItemIV"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:src="@drawable/anhdienthoai" />-->
 
         <TextView
             android:id="@+id/tv_tensp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/eachCartItemIV"
             android:layout_marginStart="8dp"
             android:text="Tên sản phẩm"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tv_size"
+            android:id="@+id/tv_giatien"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_tensp"
-            android:layout_toEndOf="@+id/eachCartItemIV"
             android:layout_marginStart="8dp"
-            android:text="Size"
+            android:text="Giá Tiền"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -48,8 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/layout_cart"
-            android:layout_below="@+id/tv_size"
-            android:layout_toEndOf="@+id/eachCartItemIV"
+            android:layout_below="@+id/tv_giatien"
             android:layout_marginStart="8dp"
             android:orientation="horizontal">
 
@@ -104,11 +101,10 @@
         <!--            android:textStyle="bold" />-->
         ///
         <TextView
-            android:id="@+id/tv_giatien"
+            android:id="@+id/tv_tongtien2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout_cart"
-            android:layout_toEndOf="@+id/eachCartItemIV"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Tổng tiền"

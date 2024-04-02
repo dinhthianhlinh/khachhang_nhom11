@@ -7,6 +7,7 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -31,5 +32,15 @@ public class Utility{
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         return FirebaseFirestore.getInstance().collection("Hoa Don")
                 .document(firebaseUser.getUid()).collection("HoaDon Cua Toi");
+    }
+    public static CollectionReference HoaDon1(){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        return FirebaseFirestore.getInstance().collection("Hoa Don 1");
+    }
+    public static String CurrentUserID(){
+        return FirebaseAuth.getInstance().getUid();
+    }
+    public static DocumentReference CurrentUserDetail(){
+        return FirebaseFirestore.getInstance().collection("User").document(CurrentUserID());
     }
 }

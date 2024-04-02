@@ -11,10 +11,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.khachhang.Adapter.GioHangAdapter;
 import com.example.khachhang.Adapter.ThanhToanAdapter;
 import com.example.khachhang.DTO.GioHang;
+import com.example.khachhang.DTO.HoaDon;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,7 +24,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class Thanhtaon extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnItemClickListener {
     TextView tvTenSDtThanhToan , tvDiaChiThanhToan , tvTongThanhToanHoaDon ;
     LinearLayout btnMuaHang;
     RecyclerView rcSanPhamThanhToan ;
@@ -38,28 +43,54 @@ public class Thanhtaon extends AppCompatActivity {
         setContentView(R.layout.activity_thanhtaon);
         anhxa();
         listSanPham();
+
         btnMuaHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                List<GioHang> danhSachSanPham = new ArrayList<>();
+                for (int i = 0; i < adapter.getItemCount(); i++) {
+                    danhSachSanPham.add(adapter.getItem(i));
+                }
 
-                DocumentReference documentReference;
-                GioHang gioHang = new GioHang();
-                documentReference = Utility.HoaDon().document();
-                documentReference.set(gioHang).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Utility.showToast(Thanhtaon.this, "Đã Thêm Sản Phẩm Vào Giỏ Hàng");
-                            finish();
-                        } else {
-                            Utility.showToast(Thanhtaon.this, "Thêm Sản Phẩm Vào Giỏ Hàng Thất Bại");
-                        }
-                    }
-                });
+                // Bây giờ bạn có thể xử lý danh sách sản phẩm theo nhu cầu của mình.
+                // Ví dụ: thêm tất cả các sản phẩm vào hóa đơn và thực hiện thanh toán.
+                for (GioHang gioHang : danhSachSanPham) {
+                    onItemClick(gioHang);
+                }
+                danhSachSanPham.clear();
+//                GioHang gioHang;
+//                if (getIntent().hasExtra("Gio Hang")) {
+//                    gioHang = getIntent().getParcelableExtra("Gio Hang");
+//
+//                    if (gioHang != null) {
+//                        // Hiển thị dữ liệu sản phẩm
+//                        DocumentReference documentReference;
+////                        HoaDon hoaDon = new HoaDon(gioHang.getTenSP(), gioHang.getGiaSP(), gioHang.getSoLuongSP());
+//                        documentReference = Utility.ThemSanPhamVaoGiohHang().document();
+//                        documentReference.set(gioHang).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Void> task) {
+//                                if (task.isSuccessful()) {
+//                                    Utility.showToast(Thanhtaon.this, "Đã Thêm Sản Phẩm Vào Giỏ Hàng");
+//                                    finish();
+//                                } else {
+//                                    Utility.showToast(Thanhtaon.this, "Thêm Sản Phẩm Vào Giỏ Hàng Thất Bại");
+//                                }
+//                            }
+//                        });
+//                    } else {
+//                        // Đối tượng SanPham null, xử lý lỗi ở đây
+//                        Toast.makeText(Thanhtaon.this, "Không có thông tin sản phẩm", Toast.LENGTH_SHORT).show();
+//                    }
+//                } else {
+//                    // Intent không chứa đối tượng SanPham, xử lý lỗi ở đây
+//                    Toast.makeText(Thanhtaon.this, "Intent không có đối tượng sản phẩm", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
 
     }
+
 
     @Override
     protected void onStart() {
@@ -97,11 +128,32 @@ public class Thanhtaon extends AppCompatActivity {
         rcSanPhamThanhToan.setLayoutManager(new LinearLayoutManager(this));
         adapter = new GioHangAdapter(options,this);
         rcSanPhamThanhToan.setAdapter(adapter);
+        adapter.setOnItemClickListener(this);
+    }
 
-        // Khởi tạo adapter với FirestoreRecyclerOptions
-        adapter = new GioHangAdapter(options, this);
+    @Override
+    public void onItemClick(GioHang gioHang) {
+        HoaDon hoaDon = new HoaDon(gioHang.tenSP , gioHang.giaSP , gioHang.soLuongSP);
+        hoaDon.setTenSP(gioHang.tenSP);
+        hoaDon.setGiaSP(gioHang.giaSP);
+        hoaDon.setSoLuongSP(gioHang.soLuongSP);
+        DocumentReference documentReference;
+        documentReference = Utility.HoaDon1().document();
+        documentReference.set(hoaDon).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Utility.showToast(Thanhtaon.this, "Mua Thành Công");
+                    finish();
+                } else {
+                    Utility.showToast(Thanhtaon.this, "Mua Thất Bại");
+                }
+            }
+        });
+    }
 
-        // Đặt adapter cho RecyclerView
-        rcSanPhamThanhToan.setAdapter(adapter);
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 }
