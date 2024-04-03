@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.khachhang.DTO.GioHang;
-import com.example.khachhang.DTO.HoaDon;
 import com.example.khachhang.DTO.SanPham;
 
 import android.content.Context;
@@ -70,6 +69,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             // Intent không chứa đối tượng SanPham, xử lý lỗi ở đây
             Toast.makeText(this, "Intent không có đối tượng sản phẩm", Toast.LENGTH_SHORT).show();
         }
+
         cartItemCount = findViewById(R.id.cartItemCount);
         cartIcon = findViewById(R.id.cartIcon);
         cartIcon.setOnClickListener(new View.OnClickListener() {
@@ -140,48 +140,26 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     }
 
     private void themSanPhamVaoGioHang(SanPham sanPham) {
-        if (getIntent().hasExtra("SAN_PHAM")) {
-            sanPham = getIntent().getParcelableExtra("SAN_PHAM");
-
-            if (sanPham != null) {
-                // Hiển thị dữ liệu sản phẩm
-                TextView textViewTenSP = findViewById(R.id.tvTenSP);
-                textViewTenSP.setText(sanPham.tenSP);
-                TextView textViewHang = findViewById(R.id.tvHangSP);
-                textViewHang.setText(sanPham.hangSP);
-                TextView textViewMota = findViewById(R.id.tvMoTaSP);
-                textViewMota.setText(sanPham.moTaSP);
-                TextView tvGiaSP = findViewById(R.id.tvGiaSP);
-                tvGiaSP.setText(String.valueOf(sanPham.giaSP));
-                DocumentReference documentReference;
-                GioHang gioHang = new GioHang(sanPham.getTenSP(), sanPham.getGiaSP(),1);
-                documentReference = Utility.ThemSanPhamVaoGiohHang().document();
-                documentReference.set(gioHang).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Utility.showToast(ChiTietSanPhamActivity.this, "Đã Thêm Sản Phẩm Vào Giỏ Hàng");
-                            finish();
-                        } else {
-                            Utility.showToast(ChiTietSanPhamActivity.this, "Thêm Sản Phẩm Vào Giỏ Hàng Thất Bại");
-                        }
-                    }
-                });
-            } else {
-                // Đối tượng SanPham null, xử lý lỗi ở đây
-                Toast.makeText(this, "Không có thông tin sản phẩm", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            // Intent không chứa đối tượng SanPham, xử lý lỗi ở đây
-            Toast.makeText(this, "Intent không có đối tượng sản phẩm", Toast.LENGTH_SHORT).show();
-        }
 
         soLuongSanPhamTrongGioHang++;
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("cartItemCount", soLuongSanPhamTrongGioHang);
         editor.apply();
 
-
+        DocumentReference documentReference;
+        GioHang gioHang = new GioHang();
+        documentReference = Utility.ThemSanPhamVaoGiohHang().document();
+        documentReference.set(gioHang).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Utility.showToast(ChiTietSanPhamActivity.this, "Đã Thêm Sản Phẩm Vào Giỏ Hàng");
+                    finish();
+                } else {
+                    Utility.showToast(ChiTietSanPhamActivity.this, "Thêm Sản Phẩm Vào Giỏ Hàng Thất Bại");
+                }
+            }
+        });
     }
 
     private void capNhatIconGioHang() {

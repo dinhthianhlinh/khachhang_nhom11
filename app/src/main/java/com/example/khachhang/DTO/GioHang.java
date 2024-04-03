@@ -1,22 +1,29 @@
 package com.example.khachhang.DTO;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class GioHang implements Serializable {
 //    String anhSP;
-    public String tenSP;
-    public int giaSP;
-    public int soLuongSP;
+    String tenSP,giaSP;
+    String soluongSP;
 
     public GioHang() {
     }
 
-    public GioHang(String tenSP, int giaSP, int soLuongSP) {
+    public GioHang( String tenSP, String giaSP, String soluongSP) {
+//        this.anhSP = anhSP;
         this.tenSP = tenSP;
         this.giaSP = giaSP;
-        this.soLuongSP = soLuongSP;
+        this.soluongSP = soluongSP;
     }
+
+//    public String getAnhSP() {
+//        return anhSP;
+//    }
+//
+//    public void setAnhSP(String anhSP) {
+//        this.anhSP = anhSP;
+//    }
 
     public String getTenSP() {
         return tenSP;
@@ -26,22 +33,21 @@ public class GioHang implements Serializable {
         this.tenSP = tenSP;
     }
 
-    public int getGiaSP() {
+    public String getGiaSP() {
         return giaSP;
     }
 
-    public void setGiaSP(int giaSP) {
+    public void setGiaSP(String giaSP) {
         this.giaSP = giaSP;
     }
 
-    public int getSoLuongSP() {
-        return soLuongSP;
+    public String getSoluongSP() {
+        return soluongSP;
     }
 
-    public void setSoLuongSP(int soLuongSP) {
-        this.soLuongSP = soLuongSP;
+    public void setSoluongSP(String soluongSP) {
+        this.soluongSP = soluongSP;
     }
-    public int tinhTongTien() {
-        return giaSP * soLuongSP;
-    }
+
+
 }

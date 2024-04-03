@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,39 +18,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 public class GioHangActivity extends AppCompatActivity {
-    boolean isEditMode = false;
     private GioHangAdapter adapter;
     private FirebaseFirestore firestore;
-    TextView tvTongTien;
     GioHang gioHang;
-    int totalCost = 0;
-    LinearLayout btnMuaHangGioHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gio_hang);
-        tvTongTien = findViewById(R.id.tv_tongtien1);
-        btnMuaHangGioHang = findViewById(R.id.btnMuaHangGioHang);
-        btnMuaHangGioHang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(GioHangActivity.this,Thanhtaon.class);
-                // Chuyển dữ liệu của sản phẩm được chọn qua Intent
 
-                // Mở Activity chi tiết sản phẩm
-                startActivity(intent);
-            }
-        });
-        totalCost = getIntent().getIntExtra("totalCost", 0);
-        // Hiển thị tổng tiền trên TextView
-        tvTongTien.setText(String.valueOf(totalCost));
         RecyclerView recyclerView = findViewById(R.id.rcGioHang);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ImageView imageView = findViewById(R.id.img_backToMain);
-
-// Trong một phương thức nào đó, bạn có thể lấy giá trị totalCost
-
         // Khởi tạo FirebaseFirestore
         firestore = FirebaseFirestore.getInstance();
 
@@ -65,6 +41,11 @@ public class GioHangActivity extends AppCompatActivity {
         adapter = new GioHangAdapter(options,this);
         recyclerView.setAdapter(adapter);
 
+        // Khởi tạo adapter với FirestoreRecyclerOptions
+        adapter = new GioHangAdapter(options, this);
+
+        // Đặt adapter cho RecyclerView
+        recyclerView.setAdapter(adapter);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,9 +73,4 @@ public class GioHangActivity extends AppCompatActivity {
         super.onResume();
         adapter.notifyDataSetChanged();
     }
-    void muaHang(){
-
-    }
-
-
 }
