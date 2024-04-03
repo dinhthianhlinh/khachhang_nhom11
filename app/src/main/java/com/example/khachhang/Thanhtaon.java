@@ -57,7 +57,7 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
                 for (GioHang gioHang : danhSachSanPham) {
                     onItemClick(gioHang);
                 }
-                adapter.clear   
+                danhSachSanPham.clear();
 //                GioHang gioHang;
 //                if (getIntent().hasExtra("Gio Hang")) {
 //                    gioHang = getIntent().getParcelableExtra("Gio Hang");
