@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:background="@color/material_dynamic_tertiary50"
+        tools:context=".AddSanPhamActivity">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/title_bar_layout">
+            <ImageButton
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/btnBack"
+                android:src="@drawable/icon_back"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackground"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvAddSP"
+                android:text="Thêm Sản Phẩm"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="32sp"
+                android:textStyle="bold"/>
+            <ImageButton
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/btnimgAddSP"
+                android:src="@drawable/icon_add"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackground"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_bar_layout"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginVertical="25dp"
+            android:backgroundTint="@color/white"
+            android:background="@color/white">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtTenSP"
+                android:hint="Nhập Tên Sản Phẩm"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginVertical="8dp"
+                android:padding="12dp"
+                android:textColor="@color/black"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtGiaSP"
+                android:hint="Nhập Giá Sản Phẩm"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginVertical="8dp"
+                android:padding="12dp"
+                android:textColor="@color/black"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtMoTaSP"
+                android:hint="Mô Tả Sản Phẩm"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginVertical="8dp"
+                android:padding="12dp"
+                android:minLines="10"
+                android:textColor="@color/black"/>
+            <Spinner
+                android:id="@+id/spinnerHangSP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Chọn Hãng Sản Phẩm"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginVertical="8dp"
+                android:padding="12dp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Xóa Sản Phẩm"
+        android:gravity="center"
+        android:id="@+id/tvDelete"
+        android:textSize="18sp"
+        android:textColor="#FF0000"/>
+
+    </RelativeLayout>

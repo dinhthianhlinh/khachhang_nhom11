@@ -33,6 +33,7 @@
             <!-- Your main content views here -->
         </FrameLayout>
 
+
         <!-- Bottom NavigationView -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/botom"

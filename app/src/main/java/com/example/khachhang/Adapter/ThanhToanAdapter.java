@@ -33,7 +33,7 @@ public class ThanhToanAdapter extends FirestoreRecyclerAdapter<SanPham, ThanhToa
     @Override
     public ThanhToanHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_thanhtoan, parent, false);
-        return new ThanhToanAdapter.ThanhToanHolder(view);
+        return new ThanhToanHolder(view);
     }
 
     public class ThanhToanHolder extends RecyclerView.ViewHolder {

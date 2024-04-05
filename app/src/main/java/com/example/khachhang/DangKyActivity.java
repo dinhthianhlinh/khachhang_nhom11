@@ -20,7 +20,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 public class DangKyActivity extends AppCompatActivity {
     Button btnDangKy;
@@ -38,11 +37,8 @@ public class DangKyActivity extends AppCompatActivity {
         txtRePass = findViewById(R.id.txtRePass);
         edtEmail = findViewById(R.id.edtEmail);
         txtEmail = findViewById(R.id.txtEmail);
-        edtTen = findViewById(R.id.edtTen);
-        txtTen = findViewById(R.id.txtTen);
         btnDangKy = findViewById(R.id.btnDangKy);
         TextView tvDangNhap = findViewById(R.id.tvDangNhap);
-        getUserName();
 
         btnDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,8 +46,7 @@ public class DangKyActivity extends AppCompatActivity {
                 String email = edtEmail.getText().toString().trim();
                 String pass = edtPass.getText().toString();
                 String repass = edtRePass.getText().toString();
-                String ten = edtTen.getText().toString();
-                if(pass.equals("") || repass.equals("") || email.equals("") || ten.equals("")){
+                if(pass.equals("") || repass.equals("") || email.equals("")){
 
                     if(pass.equals("")){
                         txtPass.setError("Vui Lòng Nhập Mật Khẩu");
@@ -67,10 +62,6 @@ public class DangKyActivity extends AppCompatActivity {
                         txtEmail.setError("Email không đúng định dạng");
                     }else {
                         txtEmail.setError(null);
-                    }if(ten.equals("")){
-                        txtTen.setError("Vui Lòng Nhập Mật Khẩu");
-                    }else {
-                        txtTen.setError(null);
                     }
                 }else{
 //                    Intent intent = new Intent(DangKyActivity.this,LoginActivity.class);
@@ -78,20 +69,6 @@ public class DangKyActivity extends AppCompatActivity {
                 }
                 createAccountInFireBase(email,pass);
                 changeInprogress(true);
-                if(user!= null){
-                    user.setTen(ten);
-                }else{
-                    user = new User(email,pass,ten);
-                }
-                Utility.CurrentUserDetail().set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        changeInprogress(false);
-                        if(task.isSuccessful()){
-
-                        }
-                    }
-                });
 
             }
         });
@@ -200,20 +177,5 @@ public class DangKyActivity extends AppCompatActivity {
         }else{
             btnDangKy.setVisibility(View.VISIBLE);
         }
-    }
-    void getUserName(){
-        changeInprogress(true);
-        Utility.CurrentUserDetail().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                changeInprogress(false);
-                if(task.isSuccessful()){
-                    user = task.getResult().toObject(User.class);
-                    if(user != null){
-                        edtTen.setText(user.getTen());
-                    }
-                }
-            }
-        });
     }
 }

@@ -1,4 +1,4 @@
-//package com.example.khachhang;
+package com.example.khachhang;//package com.example.khachhang;
 //
 //import android.os.Bundle;
 //import android.view.View;

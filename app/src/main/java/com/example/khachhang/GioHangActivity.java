@@ -6,16 +6,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.khachhang.Adapter.GioHangAdapter;
-import com.example.khachhang.Adapter.SanPhamAdapter;
 import com.example.khachhang.DTO.GioHang;
-import com.example.khachhang.DTO.SanPham;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;

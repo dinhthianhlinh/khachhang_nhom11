@@ -1,9 +1,5 @@
 package com.example.khachhang;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,18 +9,24 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.khachhang.Adapter.GioHangAdapter;
 import com.example.khachhang.Adapter.ThanhToanAdapter;
 import com.example.khachhang.DTO.GioHang;
 import com.example.khachhang.DTO.HoaDon;
-import com.example.khachhang.DTO.SanPham;
+import com.example.khachhang.DTO.HoaDonChiTiet;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ThanhToanMuaNgayActivity extends AppCompatActivity {
-    TextView tvTenSDtThanhToan , tvDiaChiThanhToan , tvTongThanhToanHoaDon ;
+    TextView tvTenSDtThanhToan , tvDiaChiThanhToan , tvTongThanhToanHoaDon,tvSDtThanhToan  ;
     LinearLayout btnMuaHang;
     RadioButton rdNhanHangThanhToan,  rdBankingThanhToan ;
     ThanhToanAdapter thanhToanAdapter;
@@ -33,8 +35,7 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
     GioHangAdapter adapter;
     TextView  soluongSP, btnTruSoLuong_cart, btnCongSoLuong_cart,tongTienSP;
 
-     TextView tvTenSP, tvGiaSP;
-    private int currentQuantity = 0;
+    TextView tvTenSP, tvGiaSP;
 
 
     @Override
@@ -43,10 +44,71 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_thanh_toan_mua_ngay);
         anhxa();
         firestore = FirebaseFirestore.getInstance();
+        DocumentReference userDocumentRef = Utility.currentUserDetails();
+
+        userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    // Lấy dữ liệu từ tài liệu người dùng
+                    String userData = documentSnapshot.getString("ten"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                    // Hiển thị dữ liệu trong TextView
+                    tvTenSDtThanhToan.setText(userData);
+                } else {
+                    // Tài liệu không tồn tại
+                    tvTenSDtThanhToan.setText(null);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Xử lý lỗi khi truy vấn dữ liệu
+                tvTenSDtThanhToan.setText(null);
+            }
+        });
+        userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    // Lấy dữ liệu từ tài liệu người dùng
+                    String userData = documentSnapshot.getString("adress"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                    // Hiển thị dữ liệu trong TextView
+                    tvDiaChiThanhToan.setText(userData);
+                } else {
+                    // Tài liệu không tồn tại
+                    tvDiaChiThanhToan.setText(null);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Xử lý lỗi khi truy vấn dữ liệu
+                tvDiaChiThanhToan.setText(null);
+            }
+        });
+        userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    // Lấy dữ liệu từ tài liệu người dùng
+                    String userData = documentSnapshot.getString("phone"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                    // Hiển thị dữ liệu trong TextView
+                    tvSDtThanhToan.setText(userData);
+                } else {
+                    // Tài liệu không tồn tại
+                    tvSDtThanhToan.setText(null);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Xử lý lỗi khi truy vấn dữ liệu
+                tvSDtThanhToan.setText(null);
+            }
+        });
         Intent intent = getIntent();
         String tenSP = null;
         int giaSP = 0;
-        int moTaSP = 1;
         if (intent != null) {
             tenSP = intent.getStringExtra("TEN_SP");
             giaSP = intent.getIntExtra("GIA_SP", 0);
@@ -56,6 +118,8 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
                 tvTenSP.setText(tenSP);
                 soluongSP.setText(String.valueOf(1));
                 tvGiaSP.setText(String.valueOf(giaSP));
+                tongTienSP.setText(String.valueOf(giaSP*1));
+                tvTongThanhToanHoaDon.setText(String.valueOf(giaSP*1));
             } else {
                 // Xử lý khi dữ liệu không hợp lệ
                 Toast.makeText(this, "Không thể tìm thấy thông tin sản phẩm để thanh toán", Toast.LENGTH_SHORT).show();
@@ -71,7 +135,7 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
         btnCongSoLuong_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int currentQuantity = 1;
+                int currentQuantity = Integer.parseInt(soluongSP.getText().toString());
 
 
                 int currentPrice = Integer.parseInt(tvGiaSP.getText().toString());
@@ -85,14 +149,13 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
                 tvTongThanhToanHoaDon.setText(String.valueOf(currentPrice * currentQuantity));
 
                 // Gọi phương thức để trả về giá trị của currentQuantity
-                soLuong(currentQuantity);
             }
         });
 
         btnTruSoLuong_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int currentQuantity = 1;
+                int currentQuantity = Integer.parseInt(soluongSP.getText().toString());
                 int currentPrice = Integer.parseInt(tvGiaSP.getText().toString());
 
                 // Giảm số lượng đi 1, nhưng không nhỏ hơn 0
@@ -102,10 +165,13 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
                 soluongSP.setText(String.valueOf(currentQuantity));
                 tongTienSP.setText(String.valueOf(currentPrice * currentQuantity));
                 tvTongThanhToanHoaDon.setText(String.valueOf(currentPrice * currentQuantity));
-                soLuong(currentQuantity);
             }
         });
-        HoaDon hoaDon = new HoaDon(tenSP, giaSP, currentQuantity);
+        int soLuong = Integer.parseInt(soluongSP.getText().toString());
+        int giaTien = Integer.parseInt(tongTienSP.getText().toString());
+        String ten = tvTenSDtThanhToan.getText().toString();
+        HoaDon hoaDon = new HoaDon(ten,tenSP,giaSP,soLuong,giaTien);
+        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
         btnMuaHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,11 +222,9 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
         tvGiaSP = findViewById(R.id.tvGiaSP1);
         soluongSP = findViewById(R.id.tvSoLuong1);
         tongTienSP = findViewById(R.id.tvTongTien1);
+        tvSDtThanhToan = findViewById(R.id.tvSDtThanhToan);
     }
     private void soLuong(int soLuong ){
 
-    }
-    private void setSoLuong(int soLuong){
-        this.currentQuantity = soLuong;
     }
 }

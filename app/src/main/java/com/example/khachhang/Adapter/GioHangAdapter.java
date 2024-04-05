@@ -10,12 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.khachhang.ChiTietSanPhamActivity;
 import com.example.khachhang.DTO.GioHang;
-import com.example.khachhang.DTO.SanPham;
-import com.example.khachhang.GioHangActivity;
 import com.example.khachhang.R;
-import com.example.khachhang.Thanhtaon;
 import com.example.khachhang.Utility;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;

@@ -1,7 +1,6 @@
 package com.example.khachhang.DTO;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class GioHang implements Serializable {
 //    String anhSP;

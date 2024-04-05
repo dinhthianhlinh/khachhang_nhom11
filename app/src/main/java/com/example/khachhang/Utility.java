@@ -40,7 +40,14 @@ public class Utility{
     public static String CurrentUserID(){
         return FirebaseAuth.getInstance().getUid();
     }
-    public static DocumentReference CurrentUserDetail(){
-        return FirebaseFirestore.getInstance().collection("User").document(CurrentUserID());
+    public static DocumentReference currentUserDetails(){
+        return FirebaseFirestore.getInstance().collection("users").document(CurrentUserID());
+    }
+    public static CollectionReference HoaDonChiTiet(){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        return FirebaseFirestore.getInstance().collection("Hoa Don Chi Tiet");
+    }
+    public static void logout(){
+        FirebaseAuth.getInstance().signOut();
     }
 }

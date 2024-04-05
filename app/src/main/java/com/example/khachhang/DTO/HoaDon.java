@@ -1,14 +1,28 @@
 package com.example.khachhang.DTO;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import androidx.annotation.NonNull;
-
 public class HoaDon  {
+    public String tenKH;
     public String tenSP;
     public int giaSP;
     public int soLuongSP;
+    public int tongTienSP;
+
+    public String getTenKH() {
+        return tenKH;
+    }
+
+    public void setTenKH(String tenKH) {
+        this.tenKH = tenKH;
+    }
+
+    public HoaDon(String tenKH, String tenSP, int giaSP, int soLuongSP, int tongTienSP) {
+        this.tenKH = tenKH;
+        this.tenSP = tenSP;
+        this.giaSP = giaSP;
+        this.soLuongSP = soLuongSP;
+        this.tongTienSP = tongTienSP;
+    }
+
 
     public int getSoLuongSP() {
         return soLuongSP;
@@ -18,11 +32,12 @@ public class HoaDon  {
         this.soLuongSP = soLuongSP;
     }
 
-    public HoaDon(String tenSP, int giaSP, int soLuongSP
-    ) {
-        this.tenSP = tenSP;
-        this.giaSP = giaSP;
-        this.soLuongSP = soLuongSP;
+    public int getTongTienSP() {
+        return tongTienSP;
+    }
+
+    public void setTongTienSP(int tongTienSP) {
+        this.tongTienSP = tongTienSP;
     }
 
     public HoaDon() {
@@ -43,8 +58,5 @@ public class HoaDon  {
     public void setGiaSP(int giaSP) {
         this.giaSP = giaSP;
     }
-
-
-
 
 }

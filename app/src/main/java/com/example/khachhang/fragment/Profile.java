@@ -1,66 +1,100 @@
 package com.example.khachhang.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.khachhang.DTO.User;
+import com.example.khachhang.LoginActivity;
 import com.example.khachhang.R;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Profile#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.khachhang.Utility;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.firestore.DocumentSnapshot;
 public class Profile extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public Profile() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Profile.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Profile newInstance(String param1, String param2) {
-        Profile fragment = new Profile();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    ImageView profilePic;
+    TextInputEditText usernameInput;
+    TextInputEditText edtPhone,edtAdress;
+    Button updateProfileBtn;
+    TextView logoutBtn;
+    User user;
+    @NonNull
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        profilePic = view.findViewById(R.id.profile_image_view);
+        usernameInput = view.findViewById(R.id.profile_username);
+        edtPhone = view.findViewById(R.id.edtPhone);
+        edtAdress = view.findViewById(R.id.edtAdress);
+        updateProfileBtn = view.findViewById(R.id.profle_update_btn);
+        logoutBtn = view.findViewById(R.id.logout_btn);
+        getUserName();
+        logoutBtn.setOnClickListener((v)-> {
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                });
+        updateProfileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tenUser = usernameInput.getText().toString();
+                String phoneUser = edtPhone.getText().toString();
+                String Adress= edtAdress.getText().toString();
+                changeInprogress(true);
+                if(user!= null){
+                    user.setTen(tenUser);
+                    user.setPhone(phoneUser);
+                    user.setAdress(Adress);
+                }else{
+                    user = new User(tenUser, Utility.CurrentUserID(),phoneUser,Adress);
+                }
+                Utility.currentUserDetails().set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        changeInprogress(false);
+                        if(task.isSuccessful()){
+
+                        }
+                    }
+                });
+            }
+        });
+
+        return view;
+    }
+    void getUserName(){
+        changeInprogress(true);
+        Utility.currentUserDetails().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                changeInprogress(false);
+                if(task.isSuccessful()){
+                    user = task.getResult().toObject(User.class);
+                    if(user != null){
+                        usernameInput.setText(user.getTen());
+                        edtPhone.setText(user.getPhone());
+                        edtAdress.setText(user.getAdress());
+                    }
+                }
+            }
+        });
+    }
+    void changeInprogress(boolean inProgress){
+        if(inProgress){
+            updateProfileBtn.setVisibility(View.GONE);
+        }else{
+            updateProfileBtn.setVisibility(View.VISIBLE);
+        }
     }
 }
