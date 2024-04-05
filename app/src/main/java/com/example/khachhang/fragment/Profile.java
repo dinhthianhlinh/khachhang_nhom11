@@ -12,10 +12,10 @@ import com.example.khachhang.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link fragment_QuanLyDanhSach#newInstance} factory method to
+ * Use the {@link Profile#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragment_QuanLyDanhSach extends Fragment {
+public class Profile extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class fragment_QuanLyDanhSach extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public fragment_QuanLyDanhSach() {
+    public Profile() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class fragment_QuanLyDanhSach extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment fragment_QuanLyDanhSach.
+     * @return A new instance of fragment Profile.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragment_QuanLyDanhSach newInstance(String param1, String param2) {
-        fragment_QuanLyDanhSach fragment = new fragment_QuanLyDanhSach();
+    public static Profile newInstance(String param1, String param2) {
+        Profile fragment = new Profile();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class fragment_QuanLyDanhSach extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment__quan_ly_danh_sach, container, false);
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 }

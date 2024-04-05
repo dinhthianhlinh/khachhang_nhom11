@@ -1,39 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".trangchumenu"
-    android:id="@+id/DrawerLayout1">
+    android:fitsSystemWindows="true">
+
+    <!-- Your main content layout here -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!-- Toolbar -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#F3E77D"
-            />
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/white"
+            android:background="#0091FF" />
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:id="@+id/linearlayout"
+        <!-- Main Content -->
+        <FrameLayout
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!-- Your main content views here -->
+        </FrameLayout>
+
+        <!-- Bottom NavigationView -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/botom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#0091FF"
+            app:itemTextColor="@color/white"
+            app:itemIconTint="@color/white"
+            app:itemIconSize="20dp"
+            app:menu="@menu/botom" />
 
     </LinearLayout>
+
+    <!-- NavigationView for the drawer -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationview"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/menu_navigation"
-
-        />
-
-
+        app:headerLayout="@layout/hender"
+        app:menu="@menu/menu_navigation" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

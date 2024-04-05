@@ -27,6 +27,7 @@ public class SanPhamAdapter extends FirestoreRecyclerAdapter<SanPham, SanPhamAda
 
     @Override
     protected void onBindViewHolder(@NonNull SanPhamHolder holder, int position, @NonNull SanPham sanPham) {
+
         holder.tvTenSP.setText(sanPham.tenSP);
         holder.tvGiaSP.setText(String.valueOf(sanPham.giaSP));
         holder.tvMoTaSP.setText(sanPham.moTaSP);

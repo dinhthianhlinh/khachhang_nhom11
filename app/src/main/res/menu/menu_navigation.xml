@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/quanLySanPham"
-        android:icon="@drawable/two"
-        android:title="Quản Lý Sản Phẩm"/>
-    <item android:id="@+id/thongKe"
-        android:icon="@drawable/three"
-        android:title="Thống Kê"/>
+    <item android:id="@+id/hocho"
+        android:icon="@drawable/baseline_contact_support_24"
+        android:title="Hỗ trợ"/>
+    <item android:id="@+id/tsvtt"
+        android:icon="@drawable/baseline_file_present_24"
+        android:title="Chính sách và thông tin"/>
+    <item android:id="@+id/Caidat"
+    android:icon="@drawable/baseline_admin_panel_settings_24"
+    android:title="Cài đặt "/>
+
 
 
 </menu>

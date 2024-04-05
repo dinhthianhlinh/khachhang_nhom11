@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/Profile"
+        android:icon="@drawable/baseline_account_box_24"
+        android:title="Profile"/>
+    <item android:id="@+id/quanLySanPham"
+        android:icon="@drawable/baseline_add_home_work_24"
+        android:title="Home"/>
+    <item android:id="@+id/thongbao"
+        android:icon="@drawable/baseline_app_shortcut_24"
+        android:title="THONG BAO"/>
+    <item android:id="@+id/hoahon"
+        android:icon="@drawable/baseline_account_balance_wallet_24"
+        android:title="HÓA ĐƠN"/>
+
+
+</menu>

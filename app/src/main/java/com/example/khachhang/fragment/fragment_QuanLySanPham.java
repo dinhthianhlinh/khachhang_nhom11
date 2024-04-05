@@ -47,6 +47,7 @@ public class fragment_QuanLySanPham extends Fragment {
         sanPhamAdapter = new SanPhamAdapter(options, getContext());
         recyclerView.setAdapter(sanPhamAdapter);
 
+
         return view;
     }
 
