@@ -28,7 +28,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     private TextView cartIcon;
     private SanPham sanPham;
     ImageView imgBack;
-
+    //123
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

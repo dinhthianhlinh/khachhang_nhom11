@@ -10,7 +10,7 @@ public class HoaDon  {
     public String getTenKH() {
         return tenKH;
     }
-
+    //123
     public void setTenKH(String tenKH) {
         this.tenKH = tenKH;
     }

@@ -26,6 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ThanhToanMuaNgayActivity extends AppCompatActivity {
+    //123
     TextView tvTenSDtThanhToan , tvDiaChiThanhToan , tvTongThanhToanHoaDon,tvSDtThanhToan  ;
     LinearLayout btnMuaHang;
     RadioButton rdNhanHangThanhToan,  rdBankingThanhToan ;

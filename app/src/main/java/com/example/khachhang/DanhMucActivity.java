@@ -21,6 +21,7 @@ public class DanhMucActivity extends AppCompatActivity {
     SanPhamAdapter sanPhamAdapter;
     ImageButton btnBackSP;
     TextView tvAddSP;
+    //123
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

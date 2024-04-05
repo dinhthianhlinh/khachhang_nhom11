@@ -26,7 +26,7 @@ public class DangKyActivity extends AppCompatActivity {
     TextInputEditText edtPass,edtRePass,edtEmail,edtTen;
     TextInputLayout txtPass,txtRePass,txtEmail,txtTen;
     User user;
-
+    //123
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

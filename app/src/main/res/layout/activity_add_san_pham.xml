@@ -7,6 +7,7 @@
         android:padding="16dp"
         android:background="@color/material_dynamic_tertiary50"
         tools:context=".AddSanPhamActivity">
+<!--    123-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/slplogo"
         android:layout_gravity="center">
+        <!--    123-->
 
     </ImageView>
     <TextView

@@ -10,7 +10,7 @@ public class GioHang implements Serializable {
 
     public GioHang() {
     }
-
+    //123
     public GioHang(String tenSP, int giaSP, int soLuongSP) {
         this.tenSP = tenSP;
         this.giaSP = giaSP;

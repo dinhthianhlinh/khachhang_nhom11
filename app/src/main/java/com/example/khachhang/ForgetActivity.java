@@ -24,6 +24,7 @@ public class ForgetActivity extends AppCompatActivity {
     TextInputLayout txtEmail;
     TextInputEditText edtEmail;
     TextView tvLogin;
+    //123
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

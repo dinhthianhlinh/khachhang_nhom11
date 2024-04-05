@@ -17,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 public class trangchumenu extends AppCompatActivity {
+    //123
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private NavigationView navigationView;

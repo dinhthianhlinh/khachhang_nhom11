@@ -24,7 +24,7 @@ public class fragment_quanLyKhachHang extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    //123
     public fragment_quanLyKhachHang() {
         // Required empty public constructor
     }

@@ -16,7 +16,7 @@ public class SanPham implements Parcelable {
 
     public SanPham() {
     }
-
+    //123
     public SanPham(String tenSP, int giaSP, String hangSP, String moTaSP, Timestamp timestamp) {
         this.tenSP = tenSP;
         this.giaSP = giaSP;

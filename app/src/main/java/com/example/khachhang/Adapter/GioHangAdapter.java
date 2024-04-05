@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
+//123
 public class GioHangAdapter extends FirestoreRecyclerAdapter<GioHang, GioHangAdapter.GioHangViewHolder> {
     private final Context context;
     private TextView tv_tongtien;

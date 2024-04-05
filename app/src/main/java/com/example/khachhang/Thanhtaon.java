@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnItemClickListener {
+    //123
     TextView tvTenSDtThanhToan , tvDiaChiThanhToan , tvTongThanhToanHoaDon,tvSDtThanhToan ;
     LinearLayout btnMuaHang;
     RecyclerView rcSanPhamThanhToan ;

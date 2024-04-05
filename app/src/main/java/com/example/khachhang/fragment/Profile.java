@@ -22,7 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentSnapshot;
 public class Profile extends Fragment {
-
+    //123
     ImageView profilePic;
     TextInputEditText usernameInput;
     TextInputEditText edtPhone,edtAdress;

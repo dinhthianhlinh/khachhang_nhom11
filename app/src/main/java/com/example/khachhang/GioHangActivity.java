@@ -23,6 +23,7 @@ public class GioHangActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     TextView tvTongTien;
     GioHang gioHang;
+    //123
     int totalCost = 0;
     LinearLayout btnMuaHangGioHang;
 

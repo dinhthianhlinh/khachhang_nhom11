@@ -20,7 +20,7 @@ public class ThanhToanAdapter extends FirestoreRecyclerAdapter<SanPham, ThanhToa
         super(options);
         this.context = context;
     }
-
+    //123
     @Override
     protected void onBindViewHolder(@NonNull ThanhToanHolder holder, int position, @NonNull SanPham sanPham) {
         holder.tvTenSP.setText(sanPham.tenSP);

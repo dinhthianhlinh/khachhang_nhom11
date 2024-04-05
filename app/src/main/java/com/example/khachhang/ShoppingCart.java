@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
+    //123
     private static ShoppingCart instance;
     private List<SanPham> productList;
 

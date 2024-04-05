@@ -31,7 +31,7 @@ public class fragment_QuanLySanPham extends Fragment {
     private int soLuongSanPhamTrongGioHang = 0;
     ImageView iPhone,Oppo,SamSung,Xiaomi,Asus,RealMe;
 
-
+    //123
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

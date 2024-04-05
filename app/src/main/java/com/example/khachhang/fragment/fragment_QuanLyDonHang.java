@@ -34,7 +34,7 @@ public class fragment_QuanLyDonHang extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new HoaDonAdapter(options, getContext());
         recyclerView.setAdapter(adapter);
-
+//123
         return view;
     }
 

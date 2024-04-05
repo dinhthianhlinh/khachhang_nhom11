@@ -8,7 +8,7 @@ public class HoaDonChiTiet {
     public int tongTienSP;
     public String phone;
     public String adress;
-
+    //123
     public HoaDonChiTiet() {
     }
 
