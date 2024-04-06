@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#6395F68A"
+    android:background="@color/skyBlue"
     android:weightSum="10"
     tools:context=".GioHangActivity">
 
@@ -43,7 +43,7 @@
             android:id="@+id/btn_themvaogio"
             android:layout_width="270dp"
             android:layout_height="match_parent"
-            android:background="#A3A1FF91"
+            android:background="@color/white"
             android:orientation="vertical"
             android:gravity="center">
 
@@ -64,21 +64,21 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_tongtien1"
+                    android:id="@+id/tv_tongtien2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="0"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/black" />
             </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/btnMuaHangGioHang"
-            android:background="#C54040"
+            android:background="#FF7700"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"

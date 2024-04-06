@@ -31,7 +31,7 @@ public class GioHangActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gio_hang);
-        tvTongTien = findViewById(R.id.tv_tongtien1);
+        tvTongTien = findViewById(R.id.tv_tongtien2);
         btnMuaHangGioHang = findViewById(R.id.btnMuaHangGioHang);
         btnMuaHangGioHang.setOnClickListener(new View.OnClickListener() {
             @Override

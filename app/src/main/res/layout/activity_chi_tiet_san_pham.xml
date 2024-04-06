@@ -2,23 +2,35 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/white">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-       <ImageView
+    <!-- Nút quay về trang chính -->
+    <ImageView
         android:id="@+id/img_backToMain"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:src="@drawable/baseline_arrow_back_ios_24"/>
         <!--    123-->
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/img_backToMain"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@android:color/white">
+        <ImageView
+            android:id="@+id/anh"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/anhdienthoai"/>
 
-        <!-- TextViews để hiển thị thông tin sản phẩm -->
+        <!-- Tên sản phẩm -->
         <TextView
             android:id="@+id/tvTenSP"
             android:layout_width="match_parent"
@@ -26,84 +38,92 @@
             android:textSize="24sp"
             android:textColor="@android:color/black"
             android:textStyle="bold"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"/>
 
+        <!-- Hãng sản phẩm -->
         <TextView
             android:id="@+id/tvHangSP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textColor="@android:color/black"
-            android:layout_below="@id/tvTenSP"
             android:layout_marginBottom="8dp"/>
 
+        <!-- Mô tả sản phẩm -->
         <TextView
             android:id="@+id/tvMoTaSP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textColor="@android:color/black"
-            android:layout_below="@id/tvHangSP"
             android:layout_marginBottom="8dp"/>
 
+        <!-- Giá sản phẩm -->
         <TextView
             android:id="@+id/tvGiaSP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textColor="@android:color/black"
-            android:layout_below="@id/tvMoTaSP"
             android:layout_marginBottom="8dp"/>
 
-        <!-- Buttons để mua và đặt hàng -->
+        <!-- Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnMua"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mua" />
-
             <Button
                 android:id="@+id/btnDatHang"
-                android:layout_width="wrap_content"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:text="Đặt hàng"
-                android:layout_marginStart="16dp"/>
+                android:layout_marginEnd="12dp"
+                android:backgroundTint="@color/skyBlue"
+               />
+
+            <!-- Button Mua -->
+            <Button
+                android:id="@+id/btnMua"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/skyBlue"
+                android:text="Mua" />
+
+            <!-- Button Đặt hàng -->
         </LinearLayout>
-        <LinearLayout
+
+        <!-- Icon giỏ hàng -->
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:layout_gravity="end|bottom"
+            android:layout_marginTop="16dp">
+
             <TextView
                 android:id="@+id/cartIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
                 android:background="@drawable/baseline_add_shopping_cart_24"
-                android:gravity="center"
                 android:text="0"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:padding="4dp"/>
+
+            <!-- Số lượng hàng trong giỏ -->
             <TextView
                 android:id="@+id/cartItemCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"
+                android:layout_alignTop="@id/cartIcon"
+                android:layout_alignEnd="@id/cartIcon"
                 android:background="@color/black"
                 android:padding="4dp"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
                 android:visibility="gone" />
-        </LinearLayout>
-
+        </RelativeLayout>
 
     </LinearLayout>
 

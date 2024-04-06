@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginBottom="20sp"
-        android:background="@drawable/vientron2">
+        android:background="@color/skyBlue">
         <!--    123-->
 
         <LinearLayout

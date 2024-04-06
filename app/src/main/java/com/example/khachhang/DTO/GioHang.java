@@ -3,7 +3,7 @@ package com.example.khachhang.DTO;
 import java.io.Serializable;
 
 public class GioHang implements Serializable {
-//    String anhSP;
+    //    String anhSP;
     public String tenSP;
     public int giaSP;
     public int soLuongSP;
