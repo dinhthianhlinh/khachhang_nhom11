@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,6 +46,24 @@ public class GioHangAdapter extends FirestoreRecyclerAdapter<GioHang, GioHangAda
         holder.soluongSP.setText(String.valueOf(model.getSoLuongSP()));
         holder.giaSP.setText(String.valueOf(model.getGiaSP()));
         holder.tongTienSP.setText(String.valueOf(model.tinhTongTien()));
+//        holder.eachCartItemDeleteBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DocumentReference documentReference;
+//                documentReference = Utility.ThemSanPhamVaoGiohHang().document();
+//                documentReference.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if (task.isSuccessful()) {
+//                            Toast.makeText(context, "Xóa Sản Phẩm Thành Công", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(context, "Xóa Sản Phẩm Thành Công", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//            }
+//
+//        });
         holder.btnCongSoLuong_cart.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -153,6 +172,7 @@ public class GioHangAdapter extends FirestoreRecyclerAdapter<GioHang, GioHangAda
 
     public static class GioHangViewHolder extends RecyclerView.ViewHolder {
         TextView tenSP, giaSP, soluongSP, sizeSP, btnTruSoLuong_cart, btnCongSoLuong_cart,tongTienSP;
+        TextView eachCartItemDeleteBtn;
         // Khai báo các thành phần giao diện còn lại ở đây
 
         public GioHangViewHolder(@NonNull View itemView) {
@@ -163,6 +183,7 @@ public class GioHangAdapter extends FirestoreRecyclerAdapter<GioHang, GioHangAda
             tongTienSP = itemView.findViewById(R.id.tv_tongtien2);
             btnTruSoLuong_cart = itemView.findViewById(R.id.btnTruSoLuong_cart);
             btnCongSoLuong_cart = itemView.findViewById(R.id.btnCongSoLuong_cart);
+//            eachCartItemDeleteBtn = itemView.findViewById(R.id.eachCartItemDeleteBtn1);
 
             // Khởi tạo các thành phần giao diện còn lại ở đây
         }
