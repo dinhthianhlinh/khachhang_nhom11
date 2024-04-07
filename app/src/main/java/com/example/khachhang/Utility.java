@@ -26,17 +26,13 @@ public class Utility{
     }
     public static CollectionReference ThemSanPhamVaoGiohHang(){
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        return FirebaseFirestore.getInstance().collection("Gio Hang 1")
+        return FirebaseFirestore.getInstance().collection("Gio Hang")
                 .document(firebaseUser.getUid()).collection("Gio Hang Cua Toi");
     }
     public static CollectionReference HoaDon(){
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         return FirebaseFirestore.getInstance().collection("Hoa Don")
-                .document(firebaseUser.getUid()).collection("HoaDon Cua Toi");
-    }
-    public static CollectionReference HoaDon1(){
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        return FirebaseFirestore.getInstance().collection("Hoa Don 1");
+                .document(firebaseUser.getUid()).collection("Hoa Don Cua Toi");
     }
     public static String CurrentUserID(){
         return FirebaseAuth.getInstance().getUid();
@@ -46,7 +42,16 @@ public class Utility{
     }
     public static CollectionReference HoaDonChiTiet(){
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        return FirebaseFirestore.getInstance().collection("Hoa Don Chi Tiet");
+        return FirebaseFirestore.getInstance().collection("Hoa Don Chi Tiet")
+                .document(firebaseUser.getUid()).collection("Hoa Don Chi Tiet Cua Toi");
+    }
+    public static CollectionReference HoaDon1(){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        return FirebaseFirestore.getInstance().collection("Hoa Don 1");
+    }
+    public static CollectionReference HoaDonChiTiet1(){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        return FirebaseFirestore.getInstance().collection("Hoa Don Chi Tiet 1");
     }
     public static void logout(){
         FirebaseAuth.getInstance().signOut();

@@ -92,7 +92,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             }
 
             private void buyProduct() {
-                Intent paymentIntent = new Intent(ChiTietSanPhamActivity.this, ThanhToanMuaNgayActivity.class);
+                Intent paymentIntent = new Intent(ChiTietSanPhamActivity.this, Thanhtaon.class);
                 paymentIntent.putExtra("TEN_SP", sanPham.tenSP);
                 paymentIntent.putExtra("HANG_SP", sanPham.hangSP);
                 paymentIntent.putExtra("MOTA_SP", sanPham.moTaSP);

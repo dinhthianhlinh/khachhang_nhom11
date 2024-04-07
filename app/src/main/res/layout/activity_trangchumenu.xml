@@ -22,7 +22,16 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:titleTextColor="@color/white"
-            android:background="#0091FF" />
+            android:background="#0091FF">
+            <ImageView
+                android:id="@+id/searchView"
+                android:layout_width="30dp"
+                android:layout_height="50dp"
+                android:src="@drawable/search_ico"
+                android:layout_gravity="end"
+                android:layout_margin="20dp"
+                />
+        </androidx.appcompat.widget.Toolbar>
 
         <!-- Main Content -->
         <FrameLayout

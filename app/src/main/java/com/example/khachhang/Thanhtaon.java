@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,6 +30,7 @@ import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnItemClickListener {
     //123
@@ -47,6 +49,13 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
         setContentView(R.layout.activity_thanhtaon);
         anhxa();
         listSanPham();
+        String idHoaDon = UUID.randomUUID().toString();
+        img_backToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 //        User user = new User(ten,Utility.currentUserId());
 //        tvTenSDtThanhToan.setText(user.getTen());
         DocumentReference userDocumentRef = Utility.currentUserDetails();
@@ -130,8 +139,10 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
                 // Bây giờ bạn có thể xử lý danh sách sản phẩm theo nhu cầu của mình.
                 // Ví dụ: thêm tất cả các sản phẩm vào hóa đơn và thực hiện thanh toán.
                 for (GioHang gioHang : danhSachSanPham) {
+                    gioHang.setIdHoaDon(idHoaDon);
                     onItemClick(gioHang);
                 }
+                List<HoaDon> danhSachSanPham1 = new ArrayList<>();
                 String ten = tvTenSDtThanhToan.getText().toString();
                 String phone = tvSDtThanhToan.getText().toString();
                 String adress = tvDiaChiThanhToan.getText().toString();
@@ -139,6 +150,7 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
                 if(ten.equals("") || phone.equals("") || adress.equals("")){
                     Utility.showToast(Thanhtaon.this,"Hãy cập nhật thông tin của bạn");
                 }
+
             }
         });
 
@@ -188,35 +200,33 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
 
     @Override
     public void onItemClick(GioHang gioHang) {
+
         String ten = tvTenSDtThanhToan.getText().toString();
         String phone = tvSDtThanhToan.getText().toString();
         String adress = tvDiaChiThanhToan.getText().toString();
-        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(ten,gioHang.tenSP , gioHang.giaSP , gioHang.soLuongSP,gioHang.giaSP*gioHang.soLuongSP,phone,adress);
-        HoaDon hoaDon = new HoaDon(ten,gioHang.tenSP , gioHang.giaSP , gioHang.soLuongSP,gioHang.giaSP*gioHang.soLuongSP);
+        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(ten, gioHang.tenSP, gioHang.giaSP, gioHang.soLuongSP, gioHang.giaSP * gioHang.soLuongSP, phone, adress,Timestamp.now());
+        HoaDon hoaDon = new HoaDon(ten, gioHang.tenSP, gioHang.giaSP, gioHang.soLuongSP, gioHang.giaSP * gioHang.soLuongSP, Timestamp.now(), gioHang.idHoaDon);
         hoaDon.setTenSP(gioHang.tenSP);
         hoaDon.setGiaSP(gioHang.giaSP);
         hoaDon.setSoLuongSP(gioHang.soLuongSP);
         DocumentReference documentReference;
-        documentReference = Utility.HoaDon1().document();
         DocumentReference documentReference1;
-        documentReference1 = Utility.HoaDonChiTiet().document();
         DocumentReference documentReference2;
-        documentReference2 = Utility.HoaDon().document();
+        DocumentReference documentReference3;
+        documentReference = Utility.HoaDon().document();
+        documentReference1 = Utility.HoaDon1().document();
+        documentReference2 = Utility.HoaDonChiTiet().document();
+        documentReference3 = Utility.HoaDonChiTiet1().document();
         documentReference.set(hoaDon).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-
-
-                    Utility.showToast(Thanhtaon.this, "Mua Thành Công");
                     finish();
-
                 } else {
-                    Utility.showToast(Thanhtaon.this, "Mua Thất Bại");
                 }
             }
         });
-        documentReference1.set(hoaDonChiTiet).addOnCompleteListener(new OnCompleteListener<Void>() {
+        documentReference1.set(hoaDon).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
@@ -225,7 +235,16 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
                 }
             }
         });
-        documentReference2.set(hoaDon).addOnCompleteListener(new OnCompleteListener<Void>() {
+        documentReference2.set(hoaDonChiTiet).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    finish();
+                } else {
+                }
+            }
+        });
+        documentReference3.set(hoaDonChiTiet).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {

@@ -7,6 +7,15 @@ public class GioHang implements Serializable {
     public String tenSP;
     public int giaSP;
     public int soLuongSP;
+    public String idHoaDon;
+
+    public String getIdHoaDon() {
+        return idHoaDon;
+    }
+
+    public void setIdHoaDon(String idHoaDon) {
+        this.idHoaDon = idHoaDon;
+    }
 
     public GioHang() {
     }

@@ -1,5 +1,7 @@
 package com.example.khachhang.DTO;
 
+import com.google.firebase.Timestamp;
+
 public class HoaDonChiTiet {
     public String tenKH;
     public String tenSP;
@@ -8,11 +10,12 @@ public class HoaDonChiTiet {
     public int tongTienSP;
     public String phone;
     public String adress;
+    public Timestamp timestamp;
     //123
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(String tenKH, String tenSP, int giaSP, int soLuongSP, int tongTienSP, String phone, String adress) {
+    public HoaDonChiTiet(String tenKH, String tenSP, int giaSP, int soLuongSP, int tongTienSP, String phone, String adress, Timestamp timestamp) {
         this.tenKH = tenKH;
         this.tenSP = tenSP;
         this.giaSP = giaSP;
@@ -20,6 +23,15 @@ public class HoaDonChiTiet {
         this.tongTienSP = tongTienSP;
         this.phone = phone;
         this.adress = adress;
+        this.timestamp = timestamp;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getTenKH() {

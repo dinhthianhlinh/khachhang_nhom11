@@ -1,6 +1,8 @@
 package com.example.khachhang.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.khachhang.ChiTietSanPhamActivity;
 import com.example.khachhang.DTO.HoaDon;
+import com.example.khachhang.HoaDonChiTietActivity;
 import com.example.khachhang.R;
+import com.example.khachhang.Utility;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
@@ -28,6 +33,20 @@ public class HoaDonAdapter extends FirestoreRecyclerAdapter<HoaDon, HoaDonAdapte
         holder.tvGiaSP.setText(String.valueOf(model.giaSP));
         holder.tvMoTaSP.setText(String.valueOf(model.soLuongSP));
         holder.tvTongtien.setText(String.valueOf(model.tongTienSP));
+        holder.tvTimeStamp.setText(Utility.timestampToString(model.timestamp));
+        holder.tvidHoaDon.setText(model.idHoaDon);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HoaDonChiTietActivity.class);
+
+                // Chuyển dữ liệu của sản phẩm được chọn qua Intent
+                intent.putExtra("GioHang", model);
+
+                // Mở Activity chi tiết sản phẩm
+                context.startActivity(intent);
+            }
+        });
     }
 
     @NonNull
@@ -38,7 +57,7 @@ public class HoaDonAdapter extends FirestoreRecyclerAdapter<HoaDon, HoaDonAdapte
     }
 
     public class HoaDonHolder extends RecyclerView.ViewHolder {
-        TextView tvTenSP, tvGiaSP, tvMoTaSP, tvTongtien,tvTenKH;
+        TextView tvTenSP, tvGiaSP, tvMoTaSP, tvTongtien,tvTenKH,tvTimeStamp,tvidHoaDon;
 
         public HoaDonHolder(@NonNull View itemView) {
             super(itemView);
@@ -47,6 +66,8 @@ public class HoaDonAdapter extends FirestoreRecyclerAdapter<HoaDon, HoaDonAdapte
             tvMoTaSP = itemView.findViewById(R.id.tvMoTaSP);
             tvTongtien = itemView.findViewById(R.id.tvTongTien);
             tvTenKH = itemView.findViewById(R.id.tvTenKH);
+            tvTimeStamp = itemView.findViewById(R.id.tvTimeStamp);
+            tvidHoaDon = itemView.findViewById(R.id.tvidHoaDon);
         }
     }
 }

@@ -21,9 +21,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.UUID;
 
 public class ThanhToanMuaNgayActivity extends AppCompatActivity {
     //123
@@ -171,7 +174,7 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
         int soLuong = Integer.parseInt(soluongSP.getText().toString());
         int giaTien = Integer.parseInt(tongTienSP.getText().toString());
         String ten = tvTenSDtThanhToan.getText().toString();
-        HoaDon hoaDon = new HoaDon(ten,tenSP,giaSP,soLuong,giaTien);
+        HoaDon hoaDon = new HoaDon(ten,tenSP,giaSP,soLuong,giaTien, Timestamp.now(), UUID.randomUUID().toString());
         HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
         btnMuaHang.setOnClickListener(new View.OnClickListener() {
             @Override
