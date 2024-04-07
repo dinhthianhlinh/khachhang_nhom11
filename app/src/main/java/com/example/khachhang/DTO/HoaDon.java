@@ -13,8 +13,25 @@ public class HoaDon implements Parcelable {
     public int giaSP;
     public int soLuongSP;
     public int tongTienSP;
+    public String phone;
+    public String adress;
     public Timestamp timestamp;
     public String idHoaDon;
+    //123
+    public HoaDon() {
+    }
+
+    public HoaDon(String tenKH, String tenSP, int giaSP, int soLuongSP, int tongTienSP, String phone, String adress, Timestamp timestamp, String idHoaDon) {
+        this.tenKH = tenKH;
+        this.tenSP = tenSP;
+        this.giaSP = giaSP;
+        this.soLuongSP = soLuongSP;
+        this.tongTienSP = tongTienSP;
+        this.phone = phone;
+        this.adress = adress;
+        this.timestamp = timestamp;
+        this.idHoaDon = idHoaDon;
+    }
 
     protected HoaDon(Parcel in) {
         tenKH = in.readString();
@@ -22,6 +39,8 @@ public class HoaDon implements Parcelable {
         giaSP = in.readInt();
         soLuongSP = in.readInt();
         tongTienSP = in.readInt();
+        phone = in.readString();
+        adress = in.readString();
         timestamp = in.readParcelable(Timestamp.class.getClassLoader());
         idHoaDon = in.readString();
     }
@@ -38,41 +57,20 @@ public class HoaDon implements Parcelable {
         }
     };
 
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public String getTenKH() {
         return tenKH;
     }
-    //123
+
     public void setTenKH(String tenKH) {
         this.tenKH = tenKH;
-    }
-
-    public HoaDon(String tenKH, String tenSP, int giaSP, int soLuongSP, int tongTienSP, Timestamp timestamp, String idHoaDon) {
-        this.tenKH = tenKH;
-        this.tenSP = tenSP;
-        this.giaSP = giaSP;
-        this.soLuongSP = soLuongSP;
-        this.tongTienSP = tongTienSP;
-        this.timestamp = timestamp;
-        this.idHoaDon = idHoaDon;
-    }
-
-    public int getSoLuongSP() {
-        return soLuongSP;
-    }
-
-    public void setSoLuongSP(int soLuongSP) {
-        this.soLuongSP = soLuongSP;
-    }
-
-    public int getTongTienSP() {
-        return tongTienSP;
-    }
-
-    public void setTongTienSP(int tongTienSP) {
-        this.tongTienSP = tongTienSP;
-    }
-
-    public HoaDon() {
     }
 
     public String getTenSP() {
@@ -91,6 +89,38 @@ public class HoaDon implements Parcelable {
         this.giaSP = giaSP;
     }
 
+    public int getSoLuongSP() {
+        return soLuongSP;
+    }
+
+    public void setSoLuongSP(int soLuongSP) {
+        this.soLuongSP = soLuongSP;
+    }
+
+    public int getTongTienSP() {
+        return tongTienSP;
+    }
+
+    public void setTongTienSP(int tongTienSP) {
+        this.tongTienSP = tongTienSP;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -103,6 +133,8 @@ public class HoaDon implements Parcelable {
         dest.writeInt(giaSP);
         dest.writeInt(soLuongSP);
         dest.writeInt(tongTienSP);
+        dest.writeString(phone);
+        dest.writeString(adress);
         dest.writeParcelable(timestamp, flags);
         dest.writeString(idHoaDon);
     }

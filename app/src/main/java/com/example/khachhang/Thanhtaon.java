@@ -205,7 +205,7 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
         String phone = tvSDtThanhToan.getText().toString();
         String adress = tvDiaChiThanhToan.getText().toString();
         HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(ten, gioHang.tenSP, gioHang.giaSP, gioHang.soLuongSP, gioHang.giaSP * gioHang.soLuongSP, phone, adress,Timestamp.now());
-        HoaDon hoaDon = new HoaDon(ten, gioHang.tenSP, gioHang.giaSP, gioHang.soLuongSP, gioHang.giaSP * gioHang.soLuongSP, Timestamp.now(), gioHang.idHoaDon);
+        HoaDon hoaDon = new HoaDon(ten, gioHang.tenSP, gioHang.giaSP, gioHang.soLuongSP, gioHang.giaSP * gioHang.soLuongSP, phone, adress,Timestamp.now(), gioHang.idHoaDon);
         hoaDon.setTenSP(gioHang.tenSP);
         hoaDon.setGiaSP(gioHang.giaSP);
         hoaDon.setSoLuongSP(gioHang.soLuongSP);

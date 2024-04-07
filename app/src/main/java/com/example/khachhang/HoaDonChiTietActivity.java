@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +24,9 @@ import com.google.firebase.firestore.Query;
 public class HoaDonChiTietActivity extends AppCompatActivity {
     HoaDon hoaDon;
     RecyclerView rcvHoaDon;
-    HoaDonAdapter adapter;
+    HoaDonChiTietAdapter adapter;
+    TextView idDonHang,tenKH,diachi,phone,tongtien;
+    ImageView img_backTo_hdct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +34,28 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hoa_don_chi_tiet);
         TextView tvTimeStamp = findViewById(R.id.tvTimeStamp);
         rcvHoaDon = findViewById(R.id.rcvHoaDon);
+        idDonHang = findViewById(R.id.tvidHoaDon);
+        tenKH = findViewById(R.id.tenKh);
+        diachi = findViewById(R.id.adress);
+        phone = findViewById(R.id.phone);
+        tongtien = findViewById(R.id.tvTongTienThanhToan);
+        img_backTo_hdct = findViewById(R.id.img_backTo_hdct);
+        img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         if (getIntent().hasExtra("GioHang")) {
             hoaDon = getIntent().getParcelableExtra("GioHang");
 
             if (hoaDon != null) {
                 // Hiển thị dữ liệu sản phẩm
-
+                idDonHang.setText(hoaDon.idHoaDon);
+                tenKH.setText(hoaDon.tenKH);
+                diachi.setText(hoaDon.adress);
+                phone.setText(hoaDon.phone);
                 tvTimeStamp.setText(Utility.timestampToString(hoaDon.timestamp));
                 Query query = Utility.HoaDon()
                         .whereEqualTo("idHoaDon", hoaDon.idHoaDon);
@@ -45,7 +65,7 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
 
 
                 rcvHoaDon.setLayoutManager(new LinearLayoutManager(this));
-                adapter = new HoaDonAdapter(options, this);
+                adapter = new HoaDonChiTietAdapter(options, this);
                 rcvHoaDon.setAdapter(adapter);
                 adapter.startListening();
 //                adapter.stopListening();

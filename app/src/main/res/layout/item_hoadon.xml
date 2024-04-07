@@ -1,137 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp">
+    app:cardCornerRadius="30dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/login"
+    android:layout_margin="8dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginBottom="20sp"
-        android:background="@color/skyBlue">
+        android:backgroundTint="@color/login">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hóa đơn bán hàng"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:padding="16dp" />
         <!--    123-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tên Khách Hàng :"
-                android:textSize="22sp"
-                android:layout_marginVertical="4dp"
-                android:textColor="@color/white"
+                android:text="Số hóa đơn: "
+                android:textSize="16sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="4dp"
                 />
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tên Sản Phẩm"
-                android:id="@+id/tvidHoaDon"
-                android:textSize="18sp"
-                android:layout_marginVertical="4dp"
-                android:textColor="@color/white"/>
+                android:text="Số hóa đơn: "
+                android:textSize="16sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="4dp"
+                android:id="@+id/tvidHoaDon" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tên Khách Hàng :"
-                android:textSize="22sp"
-                android:layout_marginVertical="4dp"
-                android:textColor="@color/white"
+                android:text="Ngày tạo: "
+                android:textSize="17sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 />
             <TextView
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tên Sản Phẩm"
+                android:text="Ngày tạo: "
+                android:textSize="17sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:id="@+id/tvTenKH"
-                android:textSize="18sp"
-                android:layout_marginVertical="4dp"
-                android:textColor="@color/white"/>
+                />
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tên Sản Phẩm:"
-                android:textSize="22sp"
-                android:layout_marginVertical="4dp"
-                android:textColor="@color/white"/>
+                android:text="Khách hàng: "
+                android:textSize="16sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"/>
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tên Sản Phẩm"
-                android:id="@+id/tvTenSP"
-                android:textSize="18sp"
-                android:layout_marginVertical="4dp"
-                android:textColor="@color/white"/>
+                android:text="Khách hàng: "
+                android:textSize="16sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:id="@+id/tvTenSP" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Giá Sản Phẩm :"
-                android:textSize="22sp"
-                android:layout_marginVertical="4dp"
-                android:textColor="@color/white"/>
+                android:text="Số điện thoại: "
+                android:textSize="16sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"/>
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Giá Sản Phẩm"
-                android:id="@+id/tvGiaSP"
-                android:textSize="18sp"
-                android:layout_marginVertical="4dp"
-                android:textColor="@color/white"/>
+                android:text="Số điện thoại: "
+                android:textSize="16sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:id="@+id/tvGiaSP" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Số Lượng Sản Phẩm:"
-                android:textSize="22sp"
-                android:layout_marginVertical="4dp"
-                android:textColor="@color/white"/>
+                android:text="Địa chỉ: "
+                android:textSize="16sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"/>
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Số Lượng Sản Phẩm"
-                android:id="@+id/tvMoTaSP"
-                android:textSize="18sp"
-                android:layout_marginVertical="4dp"
-                android:textColor="@color/white"/>
+                android:text="Địa chỉ: "
+                android:textSize="16sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:id="@+id/tvMoTaSP" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:textColor="@color/black"
+                android:id="@+id/tvTongTienHoaDon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tổng Tiền :"
-                android:textSize="22sp"
-                android:layout_marginVertical="4dp"
-                android:textColor="@color/white"/>
+                android:text="Tổng tiền: "
+                android:textSize="16sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"/>
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tổng Tiền"
-                android:id="@+id/tvTongTien"
-                android:textSize="18sp"
-                android:layout_marginVertical="4dp"
-                android:textColor="@color/white"/>
+                android:text="Tổng tiền: "
+                android:textSize="16sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:id="@+id/tvTongTien"/>
 
         </LinearLayout>
         <TextView
@@ -149,4 +199,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

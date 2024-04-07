@@ -5,12 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HoaDonChiTietActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background">
+    <Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        >
+        <ImageView
+            android:id="@+id/img_backTo_hdct"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icon_back"
+            />
+    </Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hóa đơn bán hàng"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -26,6 +46,7 @@
                 android:textSize="15dp" />
 
             <TextView
+                android:id="@+id/tvidHoaDon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="15dp" />
@@ -46,8 +67,8 @@
 
             <TextView
                 android:id="@+id/tvTimeStamp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:textSize="15dp" />
 
         </LinearLayout>
@@ -65,6 +86,7 @@
                 android:textSize="15dp" />
 
             <TextView
+                android:id="@+id/tenKh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="15dp" />
@@ -84,6 +106,7 @@
                 android:textSize="15dp" />
 
             <TextView
+                android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="15dp" />
@@ -104,6 +127,7 @@
                 android:textSize="15dp" />
 
             <TextView
+                android:id="@+id/adress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="15dp" />
@@ -115,7 +139,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvHoaDon"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="260dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="40dp"/>
@@ -125,6 +149,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
@@ -132,32 +157,11 @@
             android:textSize="15dp"
             android:textStyle="bold"
 
-            android:text="Phi van chuyen:"/>
+            android:text="Tổng tiền thanh toán:"/>
 
         <TextView
-            android:layout_marginLeft="160dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3.000.000"
-            android:textSize="15dp" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:textStyle="bold"
-
-            android:text="Tong tien thanh toan:"/>
-
-        <TextView
-            android:layout_marginLeft="120dp"
+            android:id="@+id/tvTongTienThanhToan"
+            android:layout_marginLeft="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3.000.000"

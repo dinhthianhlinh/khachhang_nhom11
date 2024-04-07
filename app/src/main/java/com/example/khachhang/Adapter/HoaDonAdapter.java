@@ -28,12 +28,11 @@ public class HoaDonAdapter extends FirestoreRecyclerAdapter<HoaDon, HoaDonAdapte
     //123
     @Override
     protected void onBindViewHolder(@NonNull HoaDonHolder holder, int position, @NonNull HoaDon model) {
-        holder.tvTenKH.setText(model.tenKH);
-        holder.tvTenSP.setText(model.tenSP);
-        holder.tvGiaSP.setText(String.valueOf(model.giaSP));
-        holder.tvMoTaSP.setText(String.valueOf(model.soLuongSP));
+        holder.tvTenSP.setText(model.tenKH);
+        holder.tvGiaSP.setText(String.valueOf(model.phone));
+        holder.tvMoTaSP.setText(model.adress);
         holder.tvTongtien.setText(String.valueOf(model.tongTienSP));
-        holder.tvTimeStamp.setText(Utility.timestampToString(model.timestamp));
+        holder.tvTenKH.setText(Utility.timestampToString(model.timestamp));
         holder.tvidHoaDon.setText(model.idHoaDon);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
