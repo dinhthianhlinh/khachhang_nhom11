@@ -57,7 +57,7 @@ public class Profile extends Fragment {
                     user.setPhone(phoneUser);
                     user.setAdress(Adress);
                 }else{
-                    user = new User(tenUser, Utility.CurrentUserID(),phoneUser,Adress);
+                    user = new User(tenUser, Utility.CurrentUserID(),phoneUser,Adress,user.getEmail());
                 }
                 Utility.currentUserDetails().set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

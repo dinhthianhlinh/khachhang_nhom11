@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,11 +23,12 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.Query;
 
 public class HoaDonChiTietActivity extends AppCompatActivity {
-    HoaDon hoaDon;
+    HoaDonChiTiet hoaDon;
     RecyclerView rcvHoaDon;
     HoaDonChiTietAdapter adapter;
     TextView idDonHang,tenKH,diachi,phone,tongtien;
     ImageView img_backTo_hdct;
+    Button btnHuy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
         phone = findViewById(R.id.phone);
         tongtien = findViewById(R.id.tvTongTienThanhToan);
         img_backTo_hdct = findViewById(R.id.img_backTo_hdct);
+        btnHuy = findViewById(R.id.btnHuy);
         img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,13 +55,13 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
 
             if (hoaDon != null) {
                 // Hiển thị dữ liệu sản phẩm
-                idDonHang.setText(hoaDon.idHoaDon);
+                idDonHang.setText(hoaDon.idDonHang);
                 tenKH.setText(hoaDon.tenKH);
                 diachi.setText(hoaDon.adress);
                 phone.setText(hoaDon.phone);
                 tvTimeStamp.setText(Utility.timestampToString(hoaDon.timestamp));
-                Query query = Utility.HoaDon()
-                        .whereEqualTo("idHoaDon", hoaDon.idHoaDon);
+                Query query = Utility.HoaDon1()
+                        .whereEqualTo("idHoaDon", hoaDon.idDonHang);
                 FirestoreRecyclerOptions<HoaDon> options = new FirestoreRecyclerOptions.Builder<HoaDon>()
                         .setQuery(query, HoaDon.class)
                         .build();
@@ -80,19 +83,4 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
             Toast.makeText(this, "Intent không có đối tượng sản phẩm", Toast.LENGTH_SHORT).show();
         }
     }
-//    @Override
-//    public void onStart(){
-//        super.onStart();
-//        adapter.startListening();
-//    }
-//    @Override
-//    public void onStop(){
-//        super.onStop();
-//        adapter.stopListening();
-//    }
-//    @Override
-//    public void onResume(){
-//        super.onResume();
-//        adapter.notifyDataSetChanged();
-//    }
 }

@@ -13,27 +13,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.khachhang.ChiTietSanPhamActivity;
 import com.example.khachhang.DTO.HoaDon;
+import com.example.khachhang.DTO.HoaDonChiTiet;
 import com.example.khachhang.HoaDonChiTietActivity;
 import com.example.khachhang.R;
 import com.example.khachhang.Utility;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-public class HoaDonAdapter extends FirestoreRecyclerAdapter<HoaDon, HoaDonAdapter.HoaDonHolder> {
+public class HoaDonAdapter extends FirestoreRecyclerAdapter<HoaDonChiTiet, HoaDonAdapter.HoaDonHolder> {
     Context context;
-    public HoaDonAdapter(@NonNull FirestoreRecyclerOptions<HoaDon> options,Context context) {
+    public HoaDonAdapter(@NonNull FirestoreRecyclerOptions<HoaDonChiTiet> options,Context context) {
         super(options);
         this.context = context;
     }
     //123
     @Override
-    protected void onBindViewHolder(@NonNull HoaDonHolder holder, int position, @NonNull HoaDon model) {
+    protected void onBindViewHolder(@NonNull HoaDonHolder holder, int position, @NonNull HoaDonChiTiet model) {
         holder.tvTenSP.setText(model.tenKH);
         holder.tvGiaSP.setText(String.valueOf(model.phone));
         holder.tvMoTaSP.setText(model.adress);
         holder.tvTongtien.setText(String.valueOf(model.tongTienSP));
         holder.tvTenKH.setText(Utility.timestampToString(model.timestamp));
-        holder.tvidHoaDon.setText(model.idHoaDon);
+        holder.tvidHoaDon.setText(model.idDonHang);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

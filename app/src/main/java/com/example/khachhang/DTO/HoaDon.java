@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.google.firebase.Timestamp;
 
-public class HoaDon implements Parcelable {
+public class HoaDon implements Parcelable  {
     public String tenKH;
     public String tenSP;
     public int giaSP;
@@ -17,11 +17,12 @@ public class HoaDon implements Parcelable {
     public String adress;
     public Timestamp timestamp;
     public String idHoaDon;
+    public String trangThai;
     //123
     public HoaDon() {
     }
 
-    public HoaDon(String tenKH, String tenSP, int giaSP, int soLuongSP, int tongTienSP, String phone, String adress, Timestamp timestamp, String idHoaDon) {
+    public HoaDon(String tenKH, String tenSP, int giaSP, int soLuongSP, int tongTienSP, String phone, String adress, Timestamp timestamp, String idHoaDon, String trangThai) {
         this.tenKH = tenKH;
         this.tenSP = tenSP;
         this.giaSP = giaSP;
@@ -31,6 +32,7 @@ public class HoaDon implements Parcelable {
         this.adress = adress;
         this.timestamp = timestamp;
         this.idHoaDon = idHoaDon;
+        this.trangThai = trangThai;
     }
 
     protected HoaDon(Parcel in) {
@@ -43,6 +45,7 @@ public class HoaDon implements Parcelable {
         adress = in.readString();
         timestamp = in.readParcelable(Timestamp.class.getClassLoader());
         idHoaDon = in.readString();
+        trangThai = in.readString();
     }
 
     public static final Creator<HoaDon> CREATOR = new Creator<HoaDon>() {
@@ -121,6 +124,7 @@ public class HoaDon implements Parcelable {
         this.adress = adress;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -137,5 +141,6 @@ public class HoaDon implements Parcelable {
         dest.writeString(adress);
         dest.writeParcelable(timestamp, flags);
         dest.writeString(idHoaDon);
+        dest.writeString(trangThai);
     }
 }

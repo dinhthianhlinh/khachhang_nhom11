@@ -167,4 +167,10 @@
             android:text="3.000.000"
             android:textSize="15dp" />
     </LinearLayout>
+    <Button
+        android:id="@+id/btnHuy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Hủy"/>
 </LinearLayout>

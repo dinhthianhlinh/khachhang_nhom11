@@ -160,6 +160,16 @@ public class DangKyActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    User user1 = new User(null,null,null,null,email);
+                    Utility.currentUserDetails().set(user1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            changeInprogress(false);
+                            if(task.isSuccessful()){
+
+                            }
+                        }
+                    });
                     //tạo tài khoản thành công
                     Utility.showToast(DangKyActivity.this, "Đăng Ký Thành Công,Hãy Check Email Của Bạn");;
                     firebaseAuth.getCurrentUser().sendEmailVerification();

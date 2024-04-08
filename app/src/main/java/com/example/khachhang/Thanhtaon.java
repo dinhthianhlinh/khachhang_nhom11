@@ -34,7 +34,7 @@ import java.util.UUID;
 
 public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnItemClickListener {
     //123
-    TextView tvTenSDtThanhToan , tvDiaChiThanhToan , tvTongThanhToanHoaDon,tvSDtThanhToan ;
+    TextView tvTenSDtThanhToan , tvDiaChiThanhToan , tvTongThanhToanHoaDon,tvSDtThanhToan,tvEmail ;
     LinearLayout btnMuaHang;
     RecyclerView rcSanPhamThanhToan ;
     RadioButton rdNhanHangThanhToan,  rdBankingThanhToan ;
@@ -71,6 +71,26 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
                 } else {
                     // Tài liệu không tồn tại
                     tvTenSDtThanhToan.setText(null);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Xử lý lỗi khi truy vấn dữ liệu
+                tvTenSDtThanhToan.setText(null);
+            }
+        });
+        userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    // Lấy dữ liệu từ tài liệu người dùng
+                    String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                    // Hiển thị dữ liệu trong TextView
+                    tvEmail.setText(userData);
+                } else {
+                    // Tài liệu không tồn tại
+                    tvEmail.setText(null);
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -128,9 +148,27 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
 //        rcSanPhamThanhToan.setAdapter(adapter);
 //        adapter.setOnItemClickListener(this);
 
+
         btnMuaHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String ten = tvTenSDtThanhToan.getText().toString();
+                String phone = tvSDtThanhToan.getText().toString();
+                String adress = tvDiaChiThanhToan.getText().toString();
+                String email = tvEmail.getText().toString();
+                HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(ten,email,0,phone,adress,Timestamp.now(),idHoaDon,"Chờ Xác Nhận" );
+                DocumentReference documentReference3;
+                documentReference3 = Utility.HoaDonChiTiet1().document();
+                documentReference3.set(hoaDonChiTiet).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            finish();
+                        } else {
+                        }
+                    }
+                });
+
                 List<GioHang> danhSachSanPham = new ArrayList<>();
                 for (int i = 0; i < adapter.getItemCount(); i++) {
                     danhSachSanPham.add(adapter.getItem(i));
@@ -143,9 +181,6 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
                     onItemClick(gioHang);
                 }
                 List<HoaDon> danhSachSanPham1 = new ArrayList<>();
-                String ten = tvTenSDtThanhToan.getText().toString();
-                String phone = tvSDtThanhToan.getText().toString();
-                String adress = tvDiaChiThanhToan.getText().toString();
                 danhSachSanPham.clear();
                 if(ten.equals("") || phone.equals("") || adress.equals("")){
                     Utility.showToast(Thanhtaon.this,"Hãy cập nhật thông tin của bạn");
@@ -183,7 +218,7 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
         rdBankingThanhToan = findViewById(R.id.rdBankingThanhToan);
         rdNhanHangThanhToan = findViewById(R.id.rdNhanHangThanhToan);
         tvSDtThanhToan = findViewById(R.id.tvSDtThanhToan);
-
+        tvEmail = findViewById(R.id.tvEmail);
     }
     void listSanPham(){
         firestore = FirebaseFirestore.getInstance();
@@ -204,47 +239,17 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
         String ten = tvTenSDtThanhToan.getText().toString();
         String phone = tvSDtThanhToan.getText().toString();
         String adress = tvDiaChiThanhToan.getText().toString();
-        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(ten, gioHang.tenSP, gioHang.giaSP, gioHang.soLuongSP, gioHang.giaSP * gioHang.soLuongSP, phone, adress,Timestamp.now());
-        HoaDon hoaDon = new HoaDon(ten, gioHang.tenSP, gioHang.giaSP, gioHang.soLuongSP, gioHang.giaSP * gioHang.soLuongSP, phone, adress,Timestamp.now(), gioHang.idHoaDon);
+
+        HoaDon hoaDon = new HoaDon(ten, gioHang.tenSP, gioHang.giaSP, gioHang.soLuongSP, gioHang.giaSP * gioHang.soLuongSP, phone, adress, Timestamp.now(), gioHang.idHoaDon, "Chờ Xác Nhận");
         hoaDon.setTenSP(gioHang.tenSP);
         hoaDon.setGiaSP(gioHang.giaSP);
         hoaDon.setSoLuongSP(gioHang.soLuongSP);
         DocumentReference documentReference;
         DocumentReference documentReference1;
-        DocumentReference documentReference2;
-        DocumentReference documentReference3;
-        documentReference = Utility.HoaDon().document();
+
         documentReference1 = Utility.HoaDon1().document();
-        documentReference2 = Utility.HoaDonChiTiet().document();
-        documentReference3 = Utility.HoaDonChiTiet1().document();
-        documentReference.set(hoaDon).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    finish();
-                } else {
-                }
-            }
-        });
+
         documentReference1.set(hoaDon).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    finish();
-                } else {
-                }
-            }
-        });
-        documentReference2.set(hoaDonChiTiet).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    finish();
-                } else {
-                }
-            }
-        });
-        documentReference3.set(hoaDonChiTiet).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {

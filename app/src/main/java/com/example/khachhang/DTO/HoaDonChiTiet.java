@@ -1,29 +1,88 @@
 package com.example.khachhang.DTO;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.firebase.Timestamp;
 
-public class HoaDonChiTiet {
+public class HoaDonChiTiet implements Parcelable {
     public String tenKH;
-    public String tenSP;
-    public int giaSP;
-    public int soLuongSP;
+    public String email;
     public int tongTienSP;
     public String phone;
     public String adress;
     public Timestamp timestamp;
-    //123
-    public HoaDonChiTiet() {
-    }
+    public String idDonHang;
+    public String trangThai;
 
-    public HoaDonChiTiet(String tenKH, String tenSP, int giaSP, int soLuongSP, int tongTienSP, String phone, String adress, Timestamp timestamp) {
+    public HoaDonChiTiet(String tenKH, String email, int tongTienSP, String phone, String adress, Timestamp timestamp, String idDonHang, String trangThai) {
         this.tenKH = tenKH;
-        this.tenSP = tenSP;
-        this.giaSP = giaSP;
-        this.soLuongSP = soLuongSP;
+        this.email = email;
         this.tongTienSP = tongTienSP;
         this.phone = phone;
         this.adress = adress;
         this.timestamp = timestamp;
+        this.idDonHang = idDonHang;
+        this.trangThai = trangThai;
+    }
+
+    protected HoaDonChiTiet(Parcel in) {
+        tenKH = in.readString();
+        email = in.readString();
+        tongTienSP = in.readInt();
+        phone = in.readString();
+        adress = in.readString();
+        timestamp = in.readParcelable(Timestamp.class.getClassLoader());
+        idDonHang = in.readString();
+        trangThai = in.readString();
+    }
+
+    public static final Creator<HoaDonChiTiet> CREATOR = new Creator<HoaDonChiTiet>() {
+        @Override
+        public HoaDonChiTiet createFromParcel(Parcel in) {
+            return new HoaDonChiTiet(in);
+        }
+
+        @Override
+        public HoaDonChiTiet[] newArray(int size) {
+            return new HoaDonChiTiet[size];
+        }
+    };
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
+
+
+    //123
+    public HoaDonChiTiet() {
+    }
+
+
+
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getIdDonHang() {
+        return idDonHang;
+    }
+
+    public void setIdDonHang(String idDonHang) {
+        this.idDonHang = idDonHang;
     }
 
     public Timestamp getTimestamp() {
@@ -42,29 +101,6 @@ public class HoaDonChiTiet {
         this.tenKH = tenKH;
     }
 
-    public String getTenSP() {
-        return tenSP;
-    }
-
-    public void setTenSP(String tenSP) {
-        this.tenSP = tenSP;
-    }
-
-    public int getGiaSP() {
-        return giaSP;
-    }
-
-    public void setGiaSP(int giaSP) {
-        this.giaSP = giaSP;
-    }
-
-    public int getSoLuongSP() {
-        return soLuongSP;
-    }
-
-    public void setSoLuongSP(int soLuongSP) {
-        this.soLuongSP = soLuongSP;
-    }
 
     public int getTongTienSP() {
         return tongTienSP;
@@ -88,5 +124,23 @@ public class HoaDonChiTiet {
 
     public void setAdress(String adress) {
         this.adress = adress;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(tenKH);
+        dest.writeString(email);
+        dest.writeInt(tongTienSP);
+        dest.writeString(phone);
+        dest.writeString(adress);
+        dest.writeParcelable(timestamp, flags);
+        dest.writeString(idDonHang);
+        dest.writeString(trangThai);
     }
 }
