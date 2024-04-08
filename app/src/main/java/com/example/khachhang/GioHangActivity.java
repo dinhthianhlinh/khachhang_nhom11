@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,8 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.khachhang.Adapter.GioHangAdapter;
 import com.example.khachhang.DTO.GioHang;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class GioHangActivity extends AppCompatActivity {
     boolean isEditMode = false;
@@ -33,6 +41,32 @@ public class GioHangActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gio_hang);
         tvTongTien = findViewById(R.id.tv_tongtien2);
         btnMuaHangGioHang = findViewById(R.id.btnMuaHangGioHang);
+        CollectionReference userDocumentRef = Utility.ThemSanPhamVaoGiohHang();
+
+        userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                int totalTongTien = 0;
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    if (documentSnapshot.exists()) {
+
+                        int userData = documentSnapshot.getLong("tinhTongTien").intValue(); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                        totalTongTien += userData;
+                    } else {
+                        // Tài liệu không tồn tại
+
+                    }
+                }
+                tvTongTien.setText(String.valueOf(totalTongTien));
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Xử lý lỗi khi truy vấn dữ liệu
+
+            }
+        });
         btnMuaHangGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +79,7 @@ public class GioHangActivity extends AppCompatActivity {
         });
         totalCost = getIntent().getIntExtra("totalCost", 0);
         // Hiển thị tổng tiền trên TextView
-        tvTongTien.setText(String.valueOf(totalCost));
+
         RecyclerView recyclerView = findViewById(R.id.rcGioHang);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ImageView imageView = findViewById(R.id.img_backToMain);

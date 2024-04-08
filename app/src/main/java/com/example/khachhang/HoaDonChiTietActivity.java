@@ -1,5 +1,6 @@
 package com.example.khachhang;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,14 +20,23 @@ import com.example.khachhang.DTO.HoaDonChiTiet;
 import com.example.khachhang.DTO.SanPham;
 import com.example.khachhang.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class HoaDonChiTietActivity extends AppCompatActivity {
     HoaDonChiTiet hoaDon;
     RecyclerView rcvHoaDon;
     HoaDonChiTietAdapter adapter;
-    TextView idDonHang,tenKH,diachi,phone,tongtien;
+    TextView idDonHang,tenKH,diachi,phone,tongtien,tvTongTienThanhToan;
     ImageView img_backTo_hdct;
     Button btnHuy;
 
@@ -43,6 +53,50 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
         tongtien = findViewById(R.id.tvTongTienThanhToan);
         img_backTo_hdct = findViewById(R.id.img_backTo_hdct);
         btnHuy = findViewById(R.id.btnHuy);
+        tvTongTienThanhToan = findViewById(R.id.tvTongTienThanhToan);
+        String docID = getIntent().getStringExtra("docID");
+        CollectionReference userDocumentRef = Utility.HoaDonChiTiet1();
+
+        userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                int totalTongTien = 0;
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    if (documentSnapshot.exists()) {
+
+                        String userData = documentSnapshot.getString("trangThai"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                        if (userData.equals("Đang Giao")){
+                            btnHuy.setVisibility(View.GONE);
+                        }
+                        if (userData.equals("Đã Giao")){
+                            btnHuy.setVisibility(View.GONE);
+                        }
+                    } else {
+                        // Tài liệu không tồn tại
+
+                    }
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Xử lý lỗi khi truy vấn dữ liệu
+
+            }
+        });
+        btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DocumentReference documentReference = Utility.HoaDonChiTiet1().document(docID);
+                documentReference.update("trangThai","Đã Hủy").addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful());
+                    }
+                });
+            }
+        });
         img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +113,7 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
                 tenKH.setText(hoaDon.tenKH);
                 diachi.setText(hoaDon.adress);
                 phone.setText(hoaDon.phone);
+                tvTongTienThanhToan.setText(String.valueOf(hoaDon.tongTienSP));
                 tvTimeStamp.setText(Utility.timestampToString(hoaDon.timestamp));
                 Query query = Utility.HoaDon1()
                         .whereEqualTo("idHoaDon", hoaDon.idDonHang);

@@ -46,19 +46,19 @@ public class GioHangAdapter extends FirestoreRecyclerAdapter<GioHang, GioHangAda
         holder.tenSP.setText(model.getTenSP());
         holder.soluongSP.setText(String.valueOf(model.getSoLuongSP()));
         holder.giaSP.setText(String.valueOf(model.getGiaSP()));
-        holder.tongTienSP.setText(String.valueOf(model.tinhTongTien()));
+        holder.tongTienSP.setText(String.valueOf(model.getTinhTongTien()));
         if (model.getTenSP().equals(Utility.ThemSanPhamVaoGiohHang())){
             int currentQuantity = Integer.parseInt(holder.soluongSP.getText().toString());
             currentQuantity++;
             holder.soluongSP.setText(String.valueOf(currentQuantity));
             // Cập nhật tổng tiền khi số lượng thay đổi
-            int updatedTongTien = model.getGiaSP() * currentQuantity;
-            holder.tongTienSP.setText(String.valueOf(updatedTongTien));
+//            int updatedTongTien = model.getGiaSP() * currentQuantity;
+//            holder.tongTienSP.setText(String.valueOf(updatedTongTien));
             // Cập nhật tổng tiền
-            totalCost -= tongTien;
-            totalCost += updatedTongTien;
+//            totalCost -= tongTien;
+//            totalCost += updatedTongTien;
             String docID = getSnapshots().getSnapshot(position).getId();
-            GioHang model1 = new GioHang(model.getTenSP(),model.getGiaSP(),currentQuantity );
+            GioHang model1 = new GioHang(model.getTenSP(),model.getGiaSP(),currentQuantity,model.getGiaSP()*currentQuantity );
             DocumentReference documentReference;
             documentReference = Utility.ThemSanPhamVaoGiohHang().document(docID);
             documentReference.set(model1).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -107,13 +107,13 @@ public class GioHangAdapter extends FirestoreRecyclerAdapter<GioHang, GioHangAda
                 currentQuantity++;
                 holder.soluongSP.setText(String.valueOf(currentQuantity));
                 // Cập nhật tổng tiền khi số lượng thay đổi
-                int updatedTongTien = model.getGiaSP() * currentQuantity;
-                holder.tongTienSP.setText(String.valueOf(updatedTongTien));
-                // Cập nhật tổng tiền
-                totalCost -= tongTien;
-                totalCost += updatedTongTien;
+//                int updatedTongTien = model.getGiaSP() * currentQuantity;
+//                holder.tongTienSP.setText(String.valueOf(updatedTongTien));
+//                // Cập nhật tổng tiền
+//                totalCost -= tongTien;
+//                totalCost += updatedTongTien;
                 String docID = getSnapshots().getSnapshot(position).getId();
-                GioHang model1 = new GioHang(model.getTenSP(),model.getGiaSP(),currentQuantity );
+                GioHang model1 = new GioHang(model.getTenSP(),model.getGiaSP(),currentQuantity,model.getGiaSP()*currentQuantity );
                 DocumentReference documentReference;
                 documentReference = Utility.ThemSanPhamVaoGiohHang().document(docID);
                 documentReference.set(model1).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -155,7 +155,7 @@ public class GioHangAdapter extends FirestoreRecyclerAdapter<GioHang, GioHangAda
 //                intent.putExtra("totalCost", totalCost);
 //                // Gửi Intent từ Adapter sang Activity
 //                context.startActivity(intent);
-                GioHang model1 = new GioHang(model.getTenSP(),model.getGiaSP(),currentQuantity );
+                GioHang model1 = new GioHang(model.getTenSP(),model.getGiaSP(),currentQuantity,model.getGiaSP()*currentQuantity );
                 DocumentReference documentReference;
                 documentReference = Utility.ThemSanPhamVaoGiohHang().document(docID);
                 documentReference.set(model1).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -197,7 +197,7 @@ public class GioHangAdapter extends FirestoreRecyclerAdapter<GioHang, GioHangAda
                 String tenSP = holder.tenSP.getText().toString();
                 int giaSP = Integer.valueOf(holder.giaSP.getText().toString());
                 int tongtien = Integer.valueOf(holder.tongTienSP.getText().toString());
-                GioHang gioHang = new GioHang(tenSP,giaSP,soluong);
+                GioHang gioHang = new GioHang(tenSP,giaSP,soluong,giaSP*soluong);
                 String docID = getSnapshots().getSnapshot(position).getId();
                 DocumentReference documentReference;
                 documentReference = Utility.ThemSanPhamVaoGiohHang().document(docID);

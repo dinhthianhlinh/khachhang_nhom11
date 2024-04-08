@@ -23,10 +23,13 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +62,32 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
 //        User user = new User(ten,Utility.currentUserId());
 //        tvTenSDtThanhToan.setText(user.getTen());
         DocumentReference userDocumentRef = Utility.currentUserDetails();
+        CollectionReference userDocumentRef1 = Utility.ThemSanPhamVaoGiohHang();
 
+        userDocumentRef1.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                int totalTongTien = 0;
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    if (documentSnapshot.exists()) {
+
+                        int userData = documentSnapshot.getLong("tinhTongTien").intValue(); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                        totalTongTien += userData;
+                    } else {
+                        // Tài liệu không tồn tại
+
+                    }
+                }
+                tvTongThanhToanHoaDon.setText(String.valueOf(totalTongTien));
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Xử lý lỗi khi truy vấn dữ liệu
+
+            }
+        });
         userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -156,7 +184,8 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
                 String phone = tvSDtThanhToan.getText().toString();
                 String adress = tvDiaChiThanhToan.getText().toString();
                 String email = tvEmail.getText().toString();
-                HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(ten,email,0,phone,adress,Timestamp.now(),idHoaDon,"Chờ Xác Nhận" );
+                int tontieng = Integer.parseInt(tvTongThanhToanHoaDon.getText().toString());
+                HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(ten,email,tontieng,phone,adress,Timestamp.now(),idHoaDon,"Chờ Xác Nhận" );
                 DocumentReference documentReference3;
                 documentReference3 = Utility.HoaDonChiTiet1().document();
                 documentReference3.set(hoaDonChiTiet).addOnCompleteListener(new OnCompleteListener<Void>() {

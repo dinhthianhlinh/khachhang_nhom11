@@ -29,11 +29,21 @@ public class Utility{
         return FirebaseFirestore.getInstance().collection("Gio Hang")
                 .document(firebaseUser.getUid()).collection("Gio Hang Cua Toi");
     }
+    public static CollectionReference HoaDon(){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        return FirebaseFirestore.getInstance().collection("Hoa Don")
+                .document(firebaseUser.getUid()).collection("Hoa Don Cua Toi");
+    }
     public static String CurrentUserID(){
         return FirebaseAuth.getInstance().getUid();
     }
     public static DocumentReference currentUserDetails(){
         return FirebaseFirestore.getInstance().collection("users").document(CurrentUserID());
+    }
+    public static CollectionReference HoaDonChiTiet(){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        return FirebaseFirestore.getInstance().collection("Hoa Don Chi Tiet")
+                .document(firebaseUser.getUid()).collection("Hoa Don Chi Tiet Cua Toi");
     }
     public static CollectionReference HoaDon1(){
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
