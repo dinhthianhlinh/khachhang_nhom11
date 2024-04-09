@@ -3,31 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.fragment_QuanLySanPham">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
+        android:layout_gravity="center|top"
+        android:id="@+id/hu"
         android:orientation="vertical">
         <!--    123-->
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_gravity="center"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="60dp"
+            android:layout_height="100dp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_margin="20dp"
+            android:layout_gravity="center"
             android:orientation="vertical">
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/samsung_icon"
                 android:id="@+id/imgSamSung"
-                android:layout_marginRight="30dp"/>
+              />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -35,14 +38,17 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
+            android:padding="10dp"
+            android:gravity="center"
+
             android:orientation="vertical">
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icon_xiaomi"
                 android:id="@+id/imgXiaoMi"
-                android:layout_marginRight="30dp"
+
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -52,14 +58,17 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_margin="20dp"
             android:orientation="vertical"
-            android:layout_marginLeft="60dp">
+             >
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icon_apple"
                 android:id="@+id/imgApple"
-                android:layout_marginRight="30dp"/>
+                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,21 +76,24 @@
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_margin="20dp"
             android:orientation="vertical"
-            android:layout_marginRight="60dp">
+             >
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icon_asus"
                 android:id="@+id/imgAsus"
-                android:layout_marginRight="30dp"
+
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -91,13 +103,16 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_margin="20dp"
             android:orientation="vertical">
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icon_oppo"
                 android:id="@+id/imgOppo"
-                android:layout_marginRight="30dp"/>
+                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -106,14 +121,17 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_margin="20dp"
             android:orientation="vertical"
-            android:layout_marginLeft="60dp">>
+            >
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/icon_realme"
                 android:id="@+id/imgRealMe"
-                android:layout_marginRight="30dp"
+
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -121,36 +139,38 @@
                 android:text="Realme"/>
         </LinearLayout>
     </LinearLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:orientation="vertical"
+           android:layout_height="match_parent">
+           <TextView
+               android:id="@+id/cartIcon"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="0"
+               android:textSize="16sp"
+               android:textColor="@android:color/white"
+               android:background="@drawable/bogoc"
+               android:padding="8dp"
+               android:layout_marginEnd="16dp"
+               android:layout_marginTop="16dp"
+               android:visibility="gone"
 
+               android:layout_gravity="end|top" />
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/recycler_view"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="30dp"
+               app:layout_constraintTop_toBottomOf="@id/searchView"
 
+               />
+       </LinearLayout>
 
-
-
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            app:layout_constraintTop_toBottomOf="@id/searchView"
-
-            />
-        <TextView
-            android:id="@+id/cartIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textSize="16sp"
-            android:textColor="@android:color/white"
-            android:background="@drawable/bogoc"
-            android:padding="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
-            android:visibility="gone"
-            android:layout_gravity="end|top" />
 
     </LinearLayout>
+
+
 
 
 

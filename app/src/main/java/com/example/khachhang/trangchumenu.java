@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,22 +18,33 @@ import androidx.fragment.app.Fragment;
 import com.example.khachhang.fragment.Profile;
 import com.example.khachhang.fragment.fragment_QuanLyDonHang;
 import com.example.khachhang.fragment.fragment_QuanLySanPham;
+import com.example.khachhang.fragment.thongbao;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.auth.User;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class trangchumenu extends AppCompatActivity {
-    //123
-    private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
-    private NavigationView navigationView;
+
+
     BottomNavigationView bottom;
     fragment_QuanLySanPham fragmentQuanLySanPham;
     fragment_QuanLyDonHang fragmentQuanLyDonHang;
+    thongbao thongbao;
+    TextView tvHl;
     Profile profile;
-    ImageView searchView;
+    EditText searchView;
+    private List<String> namesList = new ArrayList<>();
 
-//    private RecyclerView recyclerView;
+
+    //    private RecyclerView recyclerView;
 //    private SanPhamAdapter sanPhamAdapter;
 //    private TextView cartIcon;
     private int soLuongSanPhamTrongGioHang = 0;
@@ -45,11 +57,19 @@ public class trangchumenu extends AppCompatActivity {
         profile = new Profile();
         fragmentQuanLyDonHang = new fragment_QuanLyDonHang();
 
+        // Initialize TextView
+        tvHl = findViewById(R.id.tvHl);
+
+        // Read data from file and populate the namesList
+        readDataFromFile("your_file.txt");
+
+        // Update TextView with the list of names
+        updateTextView();
+
         // Ánh xạ các view
-        drawerLayout = findViewById(R.id.drawer_layout);
+
         bottom = findViewById(R.id.botom);
-        toolbar = findViewById(R.id.toolbar);
-        navigationView = findViewById(R.id.navigationview);
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.botom);
         bottom.setSelectedItemId(R.id.quanLySanPham);
         searchView = findViewById(R.id.searchView);
@@ -61,80 +81,63 @@ public class trangchumenu extends AppCompatActivity {
             }
         });
 
-        // Thiết lập toolbar
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
+
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if(item.getItemId() == R.id.quanLySanPham){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragmentQuanLySanPham).commit();
-                }if(item.getItemId() == R.id.Profile){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,profile).commit();
-                }if(item.getItemId() == R.id.hoahon){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragmentQuanLyDonHang).commit();
-                }
-                return true;
-            }
-        });
-        bottomNavigationView.setSelectedItemId(R.id.quanLySanPham);
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                Fragment fragment = null;
-//
-//                if (item.getItemId() == R.id.quanLySanPham) {
-//                    fragment = new fragment_QuanLySanPham();
-//                }else if (item.getItemId() == R.id.Profile) {
-//                    fragment = new Profile();
-//                }else if(item.getItemId() == R.id.hoahon){
-//                    fragment = new fragment_QuanLyDonHang();
-//                }
-//
-//                if (fragment != null) {
-//                    getSupportFragmentManager()
-//                            .beginTransaction()
-//                            .replace(R.id.fragment_container, fragment)
-//                            .commit();
-//                }
-//
-//                drawerLayout.closeDrawer(GravityCompat.START); // Đóng thanh bar sau khi chọn mục menu
-//                return true;
-//            }
-//        });
-
-
-        // Thiết lập sự kiện khi chọn mục trong NavigationView
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment = null;
-
                 if (item.getItemId() == R.id.quanLySanPham) {
-                    fragment = new fragment_QuanLySanPham();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragmentQuanLySanPham).commit();
+                }
+                if (item.getItemId() == R.id.Profile) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, profile).commit();
+                }
+                if (item.getItemId() == R.id.hoahon) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragmentQuanLyDonHang).commit();
                 }
 
-                if (fragment != null) {
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, fragment)
-                            .commit();
-                }
-
-                drawerLayout.closeDrawer(GravityCompat.START); // Đóng thanh bar sau khi chọn mục menu
                 return true;
             }
         });
 
+        bottomNavigationView.setSelectedItemId(R.id.quanLySanPham);
+    }
+    private void readDataFromFile(String fileName) {
+        InputStream inputStream = null;
+        InputStreamReader inputStreamReader = null;
+        BufferedReader bufferedReader = null;
+        try {
+            inputStream = getAssets().open(fileName);
+            inputStreamReader = new InputStreamReader(inputStream);
+            bufferedReader = new BufferedReader(inputStreamReader);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                namesList.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+                if (inputStreamReader != null) {
+                    inputStreamReader.close();
+                }
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void updateTextView() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String name : namesList) {
+            stringBuilder.append(name).append("\n");
+        }
+        tvHl.setTextSize(20); // Set text size to 20sp (adjust the value as needed)
+
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            drawerLayout.openDrawer(GravityCompat.START);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

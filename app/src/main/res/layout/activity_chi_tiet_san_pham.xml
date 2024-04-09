@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/white">
+
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
@@ -12,12 +17,12 @@
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
-        android:src="@drawable/baseline_arrow_back_ios_24"/>
-        <!--    123-->
+        android:src="@drawable/undo"/>
+    <!--    123-->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/img_backToMain"
         android:orientation="vertical"
         android:gravity="center"
@@ -28,7 +33,7 @@
             android:layout_height="200dp"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
-            android:src="@drawable/anhdienthoai"/>
+            android:src="@drawable/dien"/>
 
         <!-- Tên sản phẩm -->
         <TextView
@@ -81,7 +86,7 @@
                 android:text="Đặt hàng"
                 android:layout_marginEnd="12dp"
                 android:backgroundTint="@color/skyBlue"
-               />
+                />
 
             <!-- Button Mua -->
             <Button
@@ -128,3 +133,5 @@
     </LinearLayout>
 
 </RelativeLayout>
+
+</ScrollView>

@@ -5,68 +5,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DangKyActivity"
+    android:background="@color/white"
     android:orientation="vertical"
+    android:layout_gravity="center"
     android:gravity="center">
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/slplogo"
-        android:layout_gravity="center">
-        <!--    123-->
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:orientation="vertical"
+       android:gravity="center"
+       android:layout_margin="10dp"
+       android:layout_height="match_parent"
+       >
+       <ImageView
+           android:layout_width="200dp"
+           android:layout_height="200dp"
+           android:src="@drawable/logo"
+           android:layout_gravity="center">
+           <!--    123-->
 
-    </ImageView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login now to experience"
-        android:textSize="20dp">
-    </TextView>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:errorEnabled="true">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nhập Email"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtPass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:errorEnabled="true">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nhập password"
-            android:password="true"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtRePass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:errorEnabled="true">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtRePass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nhập lại password"
-            android:password="true"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <Button
-        android:id="@+id/btnDangKy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:text="Đăng Ký">
-    </Button>
-    <TextView
-        android:id="@+id/tvDangNhap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bạn Đã Có Tài Khoản ?">
-    </TextView>
+       </ImageView>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Login now to experience"
+           android:textSize="20dp">
+       </TextView>
+       <com.google.android.material.textfield.TextInputLayout
+           android:id="@+id/txtEmail"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:errorEnabled="true">
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/edtEmail"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Nhập Email"/>
+       </com.google.android.material.textfield.TextInputLayout>
+       <com.google.android.material.textfield.TextInputLayout
+           android:id="@+id/txtPass"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:errorEnabled="true">
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/edtPass"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Nhập password"
+               android:password="true"/>
+       </com.google.android.material.textfield.TextInputLayout>
+       <com.google.android.material.textfield.TextInputLayout
+           android:id="@+id/txtRePass"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:errorEnabled="true">
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/edtRePass"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Nhập lại password"
+               android:password="true"/>
+       </com.google.android.material.textfield.TextInputLayout>
+       <Button
+           android:id="@+id/btnDangKy"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:backgroundTint="@color/black"
+           android:text="Đăng Ký">
+       </Button>
+       <TextView
+           android:id="@+id/tvDangNhap"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Bạn Đã Có Tài Khoản ?">
+       </TextView>
+   </LinearLayout>
 </LinearLayout>

@@ -17,6 +17,7 @@ import com.example.khachhang.Adapter.ThanhToanAdapter;
 import com.example.khachhang.DTO.GioHang;
 import com.example.khachhang.DTO.HoaDon;
 import com.example.khachhang.DTO.HoaDonChiTiet;
+import com.example.khachhang.DTO.User;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,6 +46,7 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
     ImageView img_backToMain;
     FirebaseFirestore firestore;
     GioHangAdapter adapter;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

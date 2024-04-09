@@ -270,7 +270,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:text="Mua\nhàng"
-                android:textColor="@color/muahang"
+                android:textColor="@color/app_name"
                 />
         </LinearLayout>
     </LinearLayout>

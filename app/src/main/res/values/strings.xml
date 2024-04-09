@@ -6,4 +6,6 @@
     <string name="mpta">Mô Tả Sản Phẩm</string>
     <string name="hang">Hãng Sản Phẩm</string>
     <string name="time">Thời Gian Mua</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
