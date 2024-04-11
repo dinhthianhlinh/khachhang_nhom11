@@ -19,9 +19,16 @@ import com.example.khachhang.fragment.Profile;
 import com.example.khachhang.fragment.fragment_QuanLyDonHang;
 import com.example.khachhang.fragment.fragment_QuanLySanPham;
 import com.example.khachhang.fragment.thongbao;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
 
 import java.io.BufferedReader;
@@ -37,10 +44,12 @@ public class trangchumenu extends AppCompatActivity {
     BottomNavigationView bottom;
     fragment_QuanLySanPham fragmentQuanLySanPham;
     fragment_QuanLyDonHang fragmentQuanLyDonHang;
+    thongbao getThongbao;
     thongbao thongbao;
     TextView tvHl;
     Profile profile;
     EditText searchView;
+    ImageView cart;
     private List<String> namesList = new ArrayList<>();
 
 
@@ -56,7 +65,42 @@ public class trangchumenu extends AppCompatActivity {
         fragmentQuanLySanPham = new fragment_QuanLySanPham();
         profile = new Profile();
         fragmentQuanLyDonHang = new fragment_QuanLyDonHang();
+        getThongbao = new thongbao();
+        cart = findViewById(R.id.cart);
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(trangchumenu.this,GioHangActivity.class);
+                startActivity(intent);
+            }
+        });
+        DocumentReference userDocumentRef = Utility.currentUserDetails();
+        CollectionReference userDocumentRef1 = Utility.ThemSanPhamVaoGiohHang();
+        userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    // Lấy dữ liệu từ tài liệu người dùng
+                    String userData = documentSnapshot.getString("ten"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                    // Hiển thị dữ liệu trong TextView
+                    if(userData.equals("null")){
+                        tvHl.setText("Xin Chào");
+                    }else{
+                        tvHl.setText("Xin Chào  " + userData);
 
+                    }
+                } else {
+                    // Tài liệu không tồn tại
+                    tvHl.setText("Xin Chào");
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Xử lý lỗi khi truy vấn dữ liệu
+                tvHl.setText("Xin Chào");
+            }
+        });
         // Initialize TextView
         tvHl = findViewById(R.id.tvHl);
 
@@ -93,6 +137,8 @@ public class trangchumenu extends AppCompatActivity {
                 }
                 if (item.getItemId() == R.id.hoahon) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragmentQuanLyDonHang).commit();
+                }if (item.getItemId() == R.id.Thongbao) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, getThongbao).commit();
                 }
 
                 return true;

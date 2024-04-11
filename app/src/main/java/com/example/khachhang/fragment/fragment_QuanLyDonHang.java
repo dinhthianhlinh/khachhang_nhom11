@@ -40,7 +40,6 @@ public class fragment_QuanLyDonHang extends Fragment {
         View view = inflater.inflate(R.layout.fragment__quan_ly_don_hang,container,false);
         recyclerView = view.findViewById(R.id.rcyView);
         DocumentReference userDocumentRef = Utility.HoaDonChiTiet1().document();
-        TextView tvEmail = view.findViewById(R.id.tvEmail1);
         tvChoXacNhan = view.findViewById(R.id.tvChoXacNhan);
         tvDangGiao = view.findViewById(R.id.tvDangGiao);
         tvDaGiao = view.findViewById(R.id.tvDaGiao);
@@ -53,7 +52,6 @@ public class fragment_QuanLyDonHang extends Fragment {
                 if (documentSnapshot.exists()) {
                     String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
                     // Hiển thị dữ liệu trong TextView
-                    tvEmail.setText(userData);
                     Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Chờ Xác Nhận");
                     FirestoreRecyclerOptions<HoaDonChiTiet> options = new FirestoreRecyclerOptions.Builder<HoaDonChiTiet>()
                             .setQuery(query, HoaDonChiTiet.class).build();
@@ -88,7 +86,6 @@ public class fragment_QuanLyDonHang extends Fragment {
                                         if (documentSnapshot.exists()) {
                                             String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
                                             // Hiển thị dữ liệu trong TextView
-                                            tvEmail.setText(userData);
                                             Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Chờ Xác Nhận");
                                             FirestoreRecyclerOptions<HoaDonChiTiet> options = new FirestoreRecyclerOptions.Builder<HoaDonChiTiet>()
                                                     .setQuery(query, HoaDonChiTiet.class).build();
@@ -141,7 +138,6 @@ public class fragment_QuanLyDonHang extends Fragment {
                                         if (documentSnapshot.exists()) {
                                             String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
                                             // Hiển thị dữ liệu trong TextView
-                                            tvEmail.setText(userData);
                                             Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Đang Giao");
                                             FirestoreRecyclerOptions<HoaDonChiTiet> options = new FirestoreRecyclerOptions.Builder<HoaDonChiTiet>()
                                                     .setQuery(query, HoaDonChiTiet.class).build();
@@ -194,7 +190,6 @@ public class fragment_QuanLyDonHang extends Fragment {
                                         if (documentSnapshot.exists()) {
                                             String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
                                             // Hiển thị dữ liệu trong TextView
-                                            tvEmail.setText(userData);
                                             Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Đã Giao");
                                             FirestoreRecyclerOptions<HoaDonChiTiet> options = new FirestoreRecyclerOptions.Builder<HoaDonChiTiet>()
                                                     .setQuery(query, HoaDonChiTiet.class).build();
@@ -247,7 +242,6 @@ public class fragment_QuanLyDonHang extends Fragment {
                                         if (documentSnapshot.exists()) {
                                             String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
                                             // Hiển thị dữ liệu trong TextView
-                                            tvEmail.setText(userData);
                                             Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Đã Hủy");
                                             FirestoreRecyclerOptions<HoaDonChiTiet> options = new FirestoreRecyclerOptions.Builder<HoaDonChiTiet>()
                                                     .setQuery(query, HoaDonChiTiet.class).build();

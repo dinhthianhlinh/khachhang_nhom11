@@ -84,6 +84,30 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
         userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    if (documentSnapshot.exists()) {
+
+                        String userData = documentSnapshot.getString("trangThai"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                        if (userData.equals("Đã Hủy")){
+                            btnHuy.setVisibility(View.GONE);
+                        }
+                    } else {
+                        // Tài liệu không tồn tại
+
+                    }
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Xử lý lỗi khi truy vấn dữ liệu
+
+            }
+        });
+        userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 int totalTongTien = 0;
                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     if (documentSnapshot.exists()) {
@@ -138,6 +162,7 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
+
                                                 Toast.makeText(HoaDonChiTietActivity.this, "Đã Hủy", Toast.LENGTH_SHORT).show();
                                             }
 //                                            Intent intent = new Intent(HoaDonChiTietActivity.this, .class);

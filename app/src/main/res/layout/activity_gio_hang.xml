@@ -23,6 +23,14 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:src="@drawable/baseline_arrow_back_ios_24"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Giỏ Hàng"
+            android:textSize="45dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="70dp"/>
 
 
     </LinearLayout>

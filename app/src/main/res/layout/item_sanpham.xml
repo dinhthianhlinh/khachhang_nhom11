@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="150dp"
     android:background="@drawable/itemsp"
     android:gravity="center"
     android:layout_margin="10sp">
@@ -22,7 +22,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal"
             android:gravity="center"
             >
@@ -49,7 +49,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:orientation="horizontal"
             android:gravity="center"
             >
@@ -73,83 +73,83 @@
                 android:layout_marginVertical="4dp" />
         </LinearLayout>
 
-       <LinearLayout
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal"
-           android:gravity="center"
-           >
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:textColor="@color/white"
-               android:text="Mô ta sp:"
-               android:textSize="15dp"/>
-           <TextView
-               android:id="@+id/tvMoTaSP"
-               android:layout_width="match_parent"
-               android:layout_height="30dp"
-               android:hint="@string/mpta"
-               android:textSize="20sp"
-               android:layout_margin="5dp"
-               android:background="@color/skyBlue"
-               android:text="@string/time"
-               android:textColor="@color/white"
-               android:gravity="center"
-               android:layout_marginVertical="4dp" />
-       </LinearLayout>
+<!--       <LinearLayout-->
+<!--           android:layout_width="wrap_content"-->
+<!--           android:layout_height="wrap_content"-->
+<!--           android:orientation="horizontal"-->
+<!--           android:gravity="center"-->
+<!--           >-->
+<!--           <TextView-->
+<!--               android:layout_width="wrap_content"-->
+<!--               android:layout_height="wrap_content"-->
+<!--               android:textColor="@color/white"-->
+<!--               android:text="Mô ta sp:"-->
+<!--               android:textSize="15dp"/>-->
+<!--           <TextView-->
+<!--               android:id="@+id/tvMoTaSP"-->
+<!--               android:layout_width="match_parent"-->
+<!--               android:layout_height="30dp"-->
+<!--               android:hint="@string/mpta"-->
+<!--               android:textSize="20sp"-->
+<!--               android:layout_margin="5dp"-->
+<!--               android:background="@color/skyBlue"-->
+<!--               android:text="@string/time"-->
+<!--               android:textColor="@color/white"-->
+<!--               android:gravity="center"-->
+<!--               android:layout_marginVertical="4dp" />-->
+<!--       </LinearLayout>-->
 
-       <LinearLayout
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal"
-           android:gravity="center"
-           >
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:textColor="@color/white"
-               android:text="Hãng sp:"
-               android:textSize="15dp"/>
-           <TextView
-               android:id="@+id/tvHangSP"
-               android:layout_width="match_parent"
-               android:layout_height="30dp"
-               android:hint="@string/hang"
-               android:textSize="20sp"
-               android:layout_margin="5dp"
-               android:background="@color/skyBlue"
-               android:text="@string/time"
-               android:textColor="@color/white"
-               android:gravity="center"
-               android:layout_marginVertical="4dp" />
-       </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="thời gian mua:"
-                android:textSize="15dp"/>
+<!--       <LinearLayout-->
+<!--           android:layout_width="wrap_content"-->
+<!--           android:layout_height="wrap_content"-->
+<!--           android:orientation="horizontal"-->
+<!--           android:gravity="center"-->
+<!--           >-->
+<!--           <TextView-->
+<!--               android:layout_width="wrap_content"-->
+<!--               android:layout_height="wrap_content"-->
+<!--               android:textColor="@color/white"-->
+<!--               android:text="Hãng sp:"-->
+<!--               android:textSize="15dp"/>-->
+<!--           <TextView-->
+<!--               android:id="@+id/tvHangSP"-->
+<!--               android:layout_width="match_parent"-->
+<!--               android:layout_height="30dp"-->
+<!--               android:hint="@string/hang"-->
+<!--               android:textSize="20sp"-->
+<!--               android:layout_margin="5dp"-->
+<!--               android:background="@color/skyBlue"-->
+<!--               android:text="@string/time"-->
+<!--               android:textColor="@color/white"-->
+<!--               android:gravity="center"-->
+<!--               android:layout_marginVertical="4dp" />-->
+<!--       </LinearLayout>-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center"-->
+<!--            >-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:text="thời gian mua:"-->
+<!--                android:textSize="15dp"/>-->
 
-            <TextView
-                android:id="@+id/tvTimestamp"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:hint="@string/time"
-                android:textSize="20sp"
-                android:layout_margin="5dp"
-                android:gravity="center"
-                android:text="@string/time"
-                android:textColor="@color/white"
-                android:background="@color/skyBlue"
-                android:layout_marginVertical="4dp" />
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/tvTimestamp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:hint="@string/time"-->
+<!--                android:textSize="20sp"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="@string/time"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:background="@color/skyBlue"-->
+<!--                android:layout_marginVertical="4dp" />-->
+<!--        </LinearLayout>-->
     </LinearLayout>
 
 

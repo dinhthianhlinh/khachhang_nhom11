@@ -30,14 +30,12 @@ public class SanPhamAdapter extends FirestoreRecyclerAdapter<SanPham, SanPhamAda
 
         holder.tvTenSP.setText(sanPham.tenSP);
         holder.tvGiaSP.setText(String.valueOf(sanPham.giaSP));
-        holder.tvMoTaSP.setText(sanPham.moTaSP);
-        holder.tvHangSP.setText(sanPham.hangSP);
-        holder.tvTimeStamp.setText(Utility.timestampToString(sanPham.timestamp));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Tạo Intent để chuyển đến Activity chi tiết sản phẩm
                 Intent intent = new Intent(context, ChiTietSanPhamActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 // Chuyển dữ liệu của sản phẩm được chọn qua Intent
                 intent.putExtra("SAN_PHAM", sanPham);
@@ -62,9 +60,6 @@ public class SanPhamAdapter extends FirestoreRecyclerAdapter<SanPham, SanPhamAda
             super(itemView);
             tvTenSP = itemView.findViewById(R.id.tvTenSP);
             tvGiaSP = itemView.findViewById(R.id.tvGiaSP);
-            tvMoTaSP = itemView.findViewById(R.id.tvMoTaSP);
-            tvHangSP = itemView.findViewById(R.id.tvHangSP);
-            tvTimeStamp = itemView.findViewById(R.id.tvTimestamp);
         }
     }
 }

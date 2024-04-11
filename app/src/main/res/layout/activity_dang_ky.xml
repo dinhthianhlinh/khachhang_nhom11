@@ -27,7 +27,7 @@
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text="Login now to experience"
+           android:text="Đăng Ký Ngay Để Trải Nghiệm"
            android:textSize="20dp">
        </TextView>
        <com.google.android.material.textfield.TextInputLayout

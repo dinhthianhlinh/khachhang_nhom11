@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".Thanhtaon">
+    tools:context=".Thanhtaon"
+    android:background="#18CCBB"
+    >
     <LinearLayout
         android:id="@+id/ln_toolbar"
         android:layout_width="match_parent"
@@ -21,6 +23,14 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:src="@drawable/icon_back"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Thanh Toán"
+            android:textSize="45dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"/>
 
 
     </LinearLayout>
@@ -42,6 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email"
+            android:textStyle="bold"
             android:id="@+id/tvEmail"
             />
         <LinearLayout
@@ -53,6 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nguyễn Thế Sơn"
+                android:textStyle="bold"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -64,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0867471404"
+                android:textStyle="bold"
                 />
         </LinearLayout>
         <TextView
@@ -71,6 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Số Nhà 1,Xóm 2,Thôn 3,Xã 4,Huyện 5,Thành Phố 6"
+            android:textStyle="bold"
             />
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
@@ -98,28 +112,10 @@
             android:text="Thanh toán khi nhận hàng"
             android:checked="true"/>
 
-        <RadioButton
-            android:id="@+id/rdBankingThanhToan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thanh toán bằng banking"/>
+
     </RadioGroup>
 
-    <LinearLayout
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Miến phí vận chuyển cho đơn hàng trên 300,000 đ"
-            android:textStyle="bold"
-            />
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"

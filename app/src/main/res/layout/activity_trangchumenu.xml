@@ -32,11 +32,11 @@
                 android:text="Hello World!" />
 
                 <ImageView
-                    android:id="@+id/avartar"
+                    android:id="@+id/cart"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="end"
-                    android:background="@drawable/user"
+                    android:background="@drawable/icon_cart"
                     android:scaleType="fitXY"
                     />
             </LinearLayout>

@@ -65,7 +65,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 textViewTenSP.setText(sanPham.tenSP);
                 textViewMota.setText(sanPham.moTaSP);
                 textViewHang.setText(sanPham.hangSP);
-                tvGiaSP.setText(String.valueOf(sanPham.giaSP));
+                tvGiaSP.setText(String.valueOf(sanPham.giaSP) +"   VND");
             } else {
                 // Đối tượng SanPham null, xử lý lỗi ở đây
                 Toast.makeText(this, "Không có thông tin sản phẩm", Toast.LENGTH_SHORT).show();

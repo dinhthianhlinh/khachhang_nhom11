@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,16 +37,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnItemClickListener {
+public class Thanhtaon extends AppCompatActivity implements ThanhToanAdapter.OnItemClickListener {
     //123
     TextView tvTenSDtThanhToan , tvDiaChiThanhToan , tvTongThanhToanHoaDon,tvSDtThanhToan,tvEmail ;
     LinearLayout btnMuaHang;
     RecyclerView rcSanPhamThanhToan ;
     RadioButton rdNhanHangThanhToan,  rdBankingThanhToan ;
-    ThanhToanAdapter thanhToanAdapter;
+    ThanhToanAdapter adapter;
     ImageView img_backToMain;
     FirebaseFirestore firestore;
-    GioHangAdapter adapter;
     User user;
 
     @Override
@@ -170,13 +170,6 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
                 tvSDtThanhToan.setText(null);
             }
         });
-//        Query query1 = Utility.AllUser();
-//        FirestoreRecyclerOptions<GioHang> options = new FirestoreRecyclerOptions.Builder<GioHang>()
-//                .setQuery(query,GioHang.class).build();
-//        rcSanPhamThanhToan.setLayoutManager(new LinearLayoutManager(this));
-//        adapter = new GioHangAdapter(options,this);
-//        rcSanPhamThanhToan.setAdapter(adapter);
-//        adapter.setOnItemClickListener(this);
 
 
         btnMuaHang.setOnClickListener(new View.OnClickListener() {
@@ -216,6 +209,7 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
                 if(ten.equals("") || phone.equals("") || adress.equals("")){
                     Utility.showToast(Thanhtaon.this,"Hãy cập nhật thông tin của bạn");
                 }
+                Toast.makeText(Thanhtaon.this, "Thanh Toán Thành Công", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -259,7 +253,7 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
         FirestoreRecyclerOptions<GioHang> options = new FirestoreRecyclerOptions.Builder<GioHang>()
                 .setQuery(query,GioHang.class).build();
         rcSanPhamThanhToan.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new GioHangAdapter(options,this);
+        adapter = new ThanhToanAdapter(options,this);
         rcSanPhamThanhToan.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
     }
@@ -275,7 +269,6 @@ public class Thanhtaon extends AppCompatActivity implements GioHangAdapter.OnIte
         hoaDon.setTenSP(gioHang.tenSP);
         hoaDon.setGiaSP(gioHang.giaSP);
         hoaDon.setSoLuongSP(gioHang.soLuongSP);
-        DocumentReference documentReference;
         DocumentReference documentReference1;
 
         documentReference1 = Utility.HoaDon1().document();

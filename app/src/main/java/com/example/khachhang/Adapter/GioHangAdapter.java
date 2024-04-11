@@ -46,7 +46,7 @@ public class GioHangAdapter extends FirestoreRecyclerAdapter<GioHang, GioHangAda
         holder.tenSP.setText(model.getTenSP());
         holder.soluongSP.setText(String.valueOf(model.getSoLuongSP()));
         holder.giaSP.setText(String.valueOf(model.getGiaSP()));
-        holder.tongTienSP.setText(String.valueOf(model.getTinhTongTien()));
+        holder.tongTienSP.setText( String.valueOf(model.getTinhTongTien()));
         if (model.getTenSP().equals(Utility.ThemSanPhamVaoGiohHang())){
             int currentQuantity = Integer.parseInt(holder.soluongSP.getText().toString());
             currentQuantity++;
@@ -175,21 +175,7 @@ public class GioHangAdapter extends FirestoreRecyclerAdapter<GioHang, GioHangAda
                 }
             }
         });
-        Intent intent = null;
 
-        // Chuyển dữ liệu của sản phẩm được chọn qua Intent
-//        intent.putExtra("Gio Hang", model);
-//
-//        // Mở Activity chi tiết sản phẩm
-//        context.startActivity(intent);
-
-
-//        holder.imgDel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Thêm logic xóa sản phẩm khỏi giỏ hàng ở đây
-//            }
-//        });
         holder.eachCartItemDeleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
