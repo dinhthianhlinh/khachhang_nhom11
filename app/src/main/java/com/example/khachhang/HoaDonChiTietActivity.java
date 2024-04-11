@@ -60,15 +60,11 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
         userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int totalTongTien = 0;
                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     if (documentSnapshot.exists()) {
 
                         String userData = documentSnapshot.getString("trangThai"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
                         if (userData.equals("Đang Giao")){
-                            btnHuy.setVisibility(View.GONE);
-                        }
-                        if (userData.equals("Đã Giao")){
                             btnHuy.setVisibility(View.GONE);
                         }
                     } else {
@@ -85,18 +81,89 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
 
             }
         });
-        btnHuy.setOnClickListener(new View.OnClickListener() {
+        userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onClick(View v) {
-                DocumentReference documentReference = Utility.HoaDonChiTiet1().document(docID);
-                documentReference.update("trangThai","Đã Hủy").addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful());
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                int totalTongTien = 0;
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    if (documentSnapshot.exists()) {
+
+                        String userData = documentSnapshot.getString("trangThai"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                        if (userData.equals("Đang Giao")){
+                            btnHuy.setText("Đã Nhận");
+                            btnHuy.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    DocumentReference documentReference = Utility.HoaDonChiTiet1().document(docID);
+                                    documentReference.update("trangThai","Đã Giao").addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                Toast.makeText(HoaDonChiTietActivity.this, "Đã Nhận Đơn Hàng", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+
+                    } else {
+                        // Tài liệu không tồn tại
+
                     }
-                });
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Xử lý lỗi khi truy vấn dữ liệu
+
             }
         });
+        userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    if (documentSnapshot.exists()) {
+
+                        String userData = documentSnapshot.getString("trangThai"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                        if (userData.equals("Chờ Xác Nhận")){
+                            btnHuy.setText("Hủy Đơn Hàng");
+                            btnHuy.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    DocumentReference documentReference = Utility.HoaDonChiTiet1().document(docID);
+                                    documentReference.update("trangThai","Đã Hủy").addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                Toast.makeText(HoaDonChiTietActivity.this, "Đã Hủy", Toast.LENGTH_SHORT).show();
+                                            }
+//                                            Intent intent = new Intent(HoaDonChiTietActivity.this, .class);
+//                                            startActivity(intent);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+
+
+                    } else {
+                        // Tài liệu không tồn tại
+
+                    }
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Xử lý lỗi khi truy vấn dữ liệu
+
+            }
+        });
+
         img_backTo_hdct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -21,9 +21,12 @@ import com.example.khachhang.Utility;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class fragment_QuanLyDonHang extends Fragment {
 
@@ -36,39 +39,90 @@ public class fragment_QuanLyDonHang extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment__quan_ly_don_hang,container,false);
         recyclerView = view.findViewById(R.id.rcyView);
-        DocumentReference userDocumentRef = Utility.currentUserDetails();
+        DocumentReference userDocumentRef = Utility.HoaDonChiTiet1().document();
         TextView tvEmail = view.findViewById(R.id.tvEmail1);
         tvChoXacNhan = view.findViewById(R.id.tvChoXacNhan);
         tvDangGiao = view.findViewById(R.id.tvDangGiao);
         tvDaGiao = view.findViewById(R.id.tvDaGiao);
         tvDaHuy = view.findViewById(R.id.tvDaHuy);
+        CollectionReference userDocumentRef1 = Utility.HoaDonChiTiet1();
+        DocumentReference documentReference = Utility.currentUserDetails();
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                    // Hiển thị dữ liệu trong TextView
+                    tvEmail.setText(userData);
+                    Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Chờ Xác Nhận");
+                    FirestoreRecyclerOptions<HoaDonChiTiet> options = new FirestoreRecyclerOptions.Builder<HoaDonChiTiet>()
+                            .setQuery(query, HoaDonChiTiet.class).build();
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    adapter = new HoaDonAdapter(options, getContext());
+                    recyclerView.setAdapter(adapter);
+                    adapter.startListening();
+
+                } else {
+                    // Tài liệu không tồn tại
+
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Xử lý lỗi khi truy vấn dữ liệu
+
+            }
+        });
         tvChoXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                userDocumentRef1.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            // Lấy dữ liệu từ tài liệu người dùng
-                            String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
-                            // Hiển thị dữ liệu trong TextView
-                            tvEmail.setText(userData);
-                            Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Chờ Xác Nhận");
-                            FirestoreRecyclerOptions<HoaDonChiTiet> options = new FirestoreRecyclerOptions.Builder<HoaDonChiTiet>()
-                                    .setQuery(query, HoaDonChiTiet.class).build();
-                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                            adapter = new HoaDonAdapter(options, getContext());
-                            recyclerView.setAdapter(adapter);
-                            adapter.startListening();
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            if (documentSnapshot.exists()) {
+                                documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        if (documentSnapshot.exists()) {
+                                            String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                                            // Hiển thị dữ liệu trong TextView
+                                            tvEmail.setText(userData);
+                                            Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Chờ Xác Nhận");
+                                            FirestoreRecyclerOptions<HoaDonChiTiet> options = new FirestoreRecyclerOptions.Builder<HoaDonChiTiet>()
+                                                    .setQuery(query, HoaDonChiTiet.class).build();
+                                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                                            adapter = new HoaDonAdapter(options, getContext());
+                                            recyclerView.setAdapter(adapter);
+                                            adapter.startListening();
 
-                        } else {
-                            // Tài liệu không tồn tại
+                                        } else {
+                                            // Tài liệu không tồn tại
+
+                                        }
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        // Xử lý lỗi khi truy vấn dữ liệu
+
+                                    }
+                                });
+
+
+                            } else {
+                                // Tài liệu không tồn tại
+
+                            }
                         }
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         // Xử lý lỗi khi truy vấn dữ liệu
+
                     }
                 });
             }
@@ -76,30 +130,52 @@ public class fragment_QuanLyDonHang extends Fragment {
         tvDangGiao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                userDocumentRef1.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            // Lấy dữ liệu từ tài liệu người dùng
-                            String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
-                            // Hiển thị dữ liệu trong TextView
-                            tvEmail.setText(userData);
-                            Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Đang Giao");
-                            FirestoreRecyclerOptions<HoaDonChiTiet> options = new FirestoreRecyclerOptions.Builder<HoaDonChiTiet>()
-                                    .setQuery(query, HoaDonChiTiet.class).build();
-                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                            adapter = new HoaDonAdapter(options, getContext());
-                            recyclerView.setAdapter(adapter);
-                            adapter.startListening();
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            if (documentSnapshot.exists()) {
+                                documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        if (documentSnapshot.exists()) {
+                                            String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                                            // Hiển thị dữ liệu trong TextView
+                                            tvEmail.setText(userData);
+                                            Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Đang Giao");
+                                            FirestoreRecyclerOptions<HoaDonChiTiet> options = new FirestoreRecyclerOptions.Builder<HoaDonChiTiet>()
+                                                    .setQuery(query, HoaDonChiTiet.class).build();
+                                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                                            adapter = new HoaDonAdapter(options, getContext());
+                                            recyclerView.setAdapter(adapter);
+                                            adapter.startListening();
 
-                        } else {
-                            // Tài liệu không tồn tại
+                                        } else {
+                                            // Tài liệu không tồn tại
+
+                                        }
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        // Xử lý lỗi khi truy vấn dữ liệu
+
+                                    }
+                                });
+
+
+                            } else {
+                                // Tài liệu không tồn tại
+
+                            }
                         }
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         // Xử lý lỗi khi truy vấn dữ liệu
+
                     }
                 });
             }
@@ -107,30 +183,52 @@ public class fragment_QuanLyDonHang extends Fragment {
         tvDaGiao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                userDocumentRef1.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            // Lấy dữ liệu từ tài liệu người dùng
-                            String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
-                            // Hiển thị dữ liệu trong TextView
-                            tvEmail.setText(userData);
-                            Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Đã Giao");
-                            FirestoreRecyclerOptions<HoaDonChiTiet> options = new FirestoreRecyclerOptions.Builder<HoaDonChiTiet>()
-                                    .setQuery(query, HoaDonChiTiet.class).build();
-                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                            adapter = new HoaDonAdapter(options, getContext());
-                            recyclerView.setAdapter(adapter);
-                            adapter.startListening();
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            if (documentSnapshot.exists()) {
+                                documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        if (documentSnapshot.exists()) {
+                                            String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                                            // Hiển thị dữ liệu trong TextView
+                                            tvEmail.setText(userData);
+                                            Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Đã Giao");
+                                            FirestoreRecyclerOptions<HoaDonChiTiet> options = new FirestoreRecyclerOptions.Builder<HoaDonChiTiet>()
+                                                    .setQuery(query, HoaDonChiTiet.class).build();
+                                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                                            adapter = new HoaDonAdapter(options, getContext());
+                                            recyclerView.setAdapter(adapter);
+                                            adapter.startListening();
 
-                        } else {
-                            // Tài liệu không tồn tại
+                                        } else {
+                                            // Tài liệu không tồn tại
+
+                                        }
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        // Xử lý lỗi khi truy vấn dữ liệu
+
+                                    }
+                                });
+
+
+                            } else {
+                                // Tài liệu không tồn tại
+
+                            }
                         }
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         // Xử lý lỗi khi truy vấn dữ liệu
+
                     }
                 });
             }
@@ -138,58 +236,59 @@ public class fragment_QuanLyDonHang extends Fragment {
         tvDaHuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                userDocumentRef1.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            // Lấy dữ liệu từ tài liệu người dùng
-                            String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
-                            // Hiển thị dữ liệu trong TextView
-                            tvEmail.setText(userData);
-                            Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Đã Hủy");
-                            FirestoreRecyclerOptions<HoaDonChiTiet> options = new FirestoreRecyclerOptions.Builder<HoaDonChiTiet>()
-                                    .setQuery(query, HoaDonChiTiet.class).build();
-                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                            adapter = new HoaDonAdapter(options, getContext());
-                            recyclerView.setAdapter(adapter);
-                            adapter.startListening();
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            if (documentSnapshot.exists()) {
+                                documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        if (documentSnapshot.exists()) {
+                                            String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                                            // Hiển thị dữ liệu trong TextView
+                                            tvEmail.setText(userData);
+                                            Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Đã Hủy");
+                                            FirestoreRecyclerOptions<HoaDonChiTiet> options = new FirestoreRecyclerOptions.Builder<HoaDonChiTiet>()
+                                                    .setQuery(query, HoaDonChiTiet.class).build();
+                                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                                            adapter = new HoaDonAdapter(options, getContext());
+                                            recyclerView.setAdapter(adapter);
+                                            adapter.startListening();
 
-                        } else {
-                            // Tài liệu không tồn tại
+                                        } else {
+                                            // Tài liệu không tồn tại
+
+                                        }
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        // Xử lý lỗi khi truy vấn dữ liệu
+
+                                    }
+                                });
+
+
+                            } else {
+                                // Tài liệu không tồn tại
+
+                            }
                         }
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         // Xử lý lỗi khi truy vấn dữ liệu
+
                     }
                 });
             }
         });
 
+
         return view;
     }
 
-//    public void onStart() {
-//        super.onStart();
-//        if (adapter != null) {
-//            adapter.startListening();
-//        }
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        if (adapter != null) {
-//            adapter.stopListening();
-//        }
-//    }
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        if (adapter != null) {
-//            adapter.notifyDataSetChanged();
-//        }
-//    }
 }
