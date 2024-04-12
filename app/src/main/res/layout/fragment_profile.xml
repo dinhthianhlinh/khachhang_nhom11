@@ -17,15 +17,15 @@
         android:layout_margin="20dp">
         <!--    123-->
 
-        <ImageView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:background="@drawable/circule_bg"
-            android:src="@drawable/person_icon"
-            android:scaleType="centerCrop"
-            android:layout_marginBottom="40dp"
-            android:id="@+id/profile_image_view"
-            />
+<!--        <ImageView-->
+<!--            android:layout_width="160dp"-->
+<!--            android:layout_height="160dp"-->
+<!--            android:background="@drawable/circule_bg"-->
+<!--            android:src="@drawable/person_icon"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:layout_marginBottom="40dp"-->
+<!--            android:id="@+id/profile_image_view"-->
+<!--            />-->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

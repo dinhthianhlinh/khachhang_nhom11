@@ -34,7 +34,7 @@ public class Profile extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        profilePic = view.findViewById(R.id.profile_image_view);
+//        profilePic = view.findViewById(R.id.profile_image_view);
         usernameInput = view.findViewById(R.id.profile_username);
         edtPhone = view.findViewById(R.id.edtPhone);
         edtAdress = view.findViewById(R.id.edtAdress);

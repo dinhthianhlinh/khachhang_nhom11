@@ -13,33 +13,39 @@
 
 
     <LinearLayout
-        android:layout_width="410dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:background="@color/backgroundwelcome">
         <TextView
             android:id="@+id/tvChoXacNhan"
-            android:layout_width="102dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="Chờ Xác Nhận"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/tvDaGiao"
-            android:layout_width="102dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="Đã Giao"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/tvDangGiao"
-            android:layout_width="102dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="Đang Giao"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/tvDaHuy"
-            android:layout_width="102dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="Đã Hủy"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

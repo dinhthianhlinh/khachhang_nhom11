@@ -7,7 +7,7 @@
         android:title="Home"/>
     <item android:id="@+id/Thongbao"
         android:icon="@drawable/thongbao"
-        android:title="THONG BAO"/>
+        android:title="SẢN PHẨM"/>
     <item android:id="@+id/hoahon"
         android:icon="@drawable/hoadon"
         android:title="HÓA ĐƠN"/>

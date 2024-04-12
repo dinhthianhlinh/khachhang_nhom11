@@ -9,6 +9,8 @@
     <color name="my_primary">#FF5964</color>
     <color name="login">#aac389</color>
         <color name="skyBlue">#58C4F1</color>
+    <color name="backgroundwelcome">#FFD5D6D6</color>
+
 
 
 </resources>

@@ -90,7 +90,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                Intent intent = new Intent(ChiTietSanPhamActivity.this,trangchumenu.class);
+                startActivity(intent);
             }
         });
         btnMua.setOnClickListener(new View.OnClickListener() {
