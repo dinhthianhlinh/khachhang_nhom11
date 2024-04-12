@@ -176,6 +176,7 @@ public class fragment_QuanLyDonHang extends Fragment {
                 });
             }
         });
+
         tvDaGiao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

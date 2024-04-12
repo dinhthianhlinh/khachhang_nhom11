@@ -24,19 +24,23 @@
             android:layout_height="match_parent"
             android:text="Chờ Xác Nhận"
             android:gravity="center"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/textview_background" />
+
         <TextView
             android:id="@+id/tvDaGiao"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Đã Giao"
             android:gravity="center"
+            android:background="@drawable/textview_background"
             android:layout_weight="1"/>
         <TextView
             android:id="@+id/tvDangGiao"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Đang Giao"
+            android:background="@drawable/textview_background"
             android:gravity="center"
             android:layout_weight="1"/>
         <TextView
@@ -45,6 +49,7 @@
             android:layout_height="match_parent"
             android:text="Đã Hủy"
             android:gravity="center"
+            android:background="@drawable/textview_background"
             android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout

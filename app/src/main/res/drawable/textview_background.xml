@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:drawable="@color/pressedColor" /> <!-- Màu khi TextView được bấm -->
+    <item android:drawable="@color/backgroundwelcome" /> <!-- Màu mặc định -->
+</selector>
