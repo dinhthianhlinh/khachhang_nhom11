@@ -243,7 +243,6 @@ public class Thanhtaon extends AppCompatActivity implements ThanhToanAdapter.OnI
         tvTongThanhToanHoaDon = findViewById(R.id.tvTongThanhToanHoaDon);
         btnMuaHang = findViewById(R.id.btnMuaHangThanhToan);
         rcSanPhamThanhToan = findViewById(R.id.rcSanPhamThanhToan);
-        rdBankingThanhToan = findViewById(R.id.rdBankingThanhToan);
         rdNhanHangThanhToan = findViewById(R.id.rdNhanHangThanhToan);
         tvSDtThanhToan = findViewById(R.id.tvSDtThanhToan);
         tvEmail = findViewById(R.id.tvEmail);

@@ -30,7 +30,7 @@ import java.util.UUID;
 
 public class ThanhToanMuaNgayActivity extends AppCompatActivity {
     //123
-    TextView tvTenSDtThanhToan , tvDiaChiThanhToan , tvTongThanhToanHoaDon,tvSDtThanhToan  ;
+    TextView tvTenSDtThanhToan , tvDiaChiThanhToan , tvTongThanhToanHoaDon,tvSDtThanhToan,tvEmail;
     LinearLayout btnMuaHang;
     RadioButton rdNhanHangThanhToan,  rdBankingThanhToan ;
     ThanhToanAdapter thanhToanAdapter;
@@ -48,8 +48,34 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_thanh_toan_mua_ngay);
         anhxa();
         firestore = FirebaseFirestore.getInstance();
+        tvEmail = findViewById(R.id.tvEmail);
         DocumentReference userDocumentRef = Utility.currentUserDetails();
-
+        img_backToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    // Lấy dữ liệu từ tài liệu người dùng
+                    String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
+                    // Hiển thị dữ liệu trong TextView
+                    tvEmail.setText(userData);
+                } else {
+                    // Tài liệu không tồn tại
+                    tvEmail.setText(null);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Xử lý lỗi khi truy vấn dữ liệu
+                tvDiaChiThanhToan.setText(null);
+            }
+        });
         userDocumentRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -171,18 +197,21 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
                 tvTongThanhToanHoaDon.setText(String.valueOf(currentPrice * currentQuantity));
             }
         });
-        int soLuong = Integer.parseInt(soluongSP.getText().toString());
-        int giaTien = Integer.parseInt(tongTienSP.getText().toString());
-        String ten = tvTenSDtThanhToan.getText().toString();
-        String phone = tvSDtThanhToan.getText().toString();
-        String adress = tvDiaChiThanhToan.getText().toString();
-        String idHoaDon = UUID.randomUUID().toString();
 
-        HoaDon hoaDon = new HoaDon(ten, tenSP,giaTien, soLuong, giaTien * soLuong, phone, adress, Timestamp.now(), idHoaDon, "Chờ Xác Nhận");
-        HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
         btnMuaHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int soLuong = Integer.parseInt(soluongSP.getText().toString());
+                int giaTien = Integer.parseInt(tongTienSP.getText().toString());
+                String tenSP = tvTenSP.getText().toString();
+                String ten = tvTenSDtThanhToan.getText().toString();
+                String phone = tvSDtThanhToan.getText().toString();
+                String adress = tvDiaChiThanhToan.getText().toString();
+                String idHoaDon = UUID.randomUUID().toString();
+                String email = tvEmail.getText().toString();
+
+                HoaDon hoaDon = new HoaDon(ten, tenSP,giaTien, soLuong, giaTien * soLuong, phone, adress, Timestamp.now(), idHoaDon, "Chờ Xác Nhận");
+                HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(ten,email,giaTien * soLuong, phone, adress, Timestamp.now(), idHoaDon, "Chờ Xác Nhận");
                 DocumentReference documentReference;
                 documentReference = Utility.HoaDon().document();
                 documentReference.set(hoaDon).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -209,6 +238,18 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
                         }
                     }
                 });
+                DocumentReference documentReference3;
+                documentReference3 = Utility.HoaDonChiTiet1().document();
+                documentReference3.set(hoaDonChiTiet).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            finish();
+                        } else {
+                            // Xử lý khi không thể thêm dữ liệu
+                        }
+                    }
+                });
             }
         });
 
@@ -222,7 +263,6 @@ public class ThanhToanMuaNgayActivity extends AppCompatActivity {
         tvDiaChiThanhToan = findViewById(R.id.tvDiaChiThanhToan);
         tvTongThanhToanHoaDon = findViewById(R.id.tvTongThanhToanHoaDon);
         btnMuaHang = findViewById(R.id.btnMuaHangThanhToan);
-        rdBankingThanhToan = findViewById(R.id.rdBankingThanhToan);
         rdNhanHangThanhToan = findViewById(R.id.rdNhanHangThanhToan);
         btnTruSoLuong_cart = findViewById(R.id.btnTruSoLuong_cart1);
         btnCongSoLuong_cart = findViewById(R.id.btnCongSoLuong_cart1);
