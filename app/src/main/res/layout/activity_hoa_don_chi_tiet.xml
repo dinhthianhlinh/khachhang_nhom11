@@ -150,13 +150,13 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/ln123">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:textStyle="bold"
-
             android:text="Tổng tiền thanh toán:"/>
 
         <TextView
@@ -169,8 +169,10 @@
     </LinearLayout>
     <Button
         android:id="@+id/btnHuy"
+        android:layout_below="@+id/ln123"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Hủy"/>
+        android:text="Hủy"
+        />
 </LinearLayout>

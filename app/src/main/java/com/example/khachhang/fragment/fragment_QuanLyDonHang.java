@@ -52,7 +52,7 @@ public class fragment_QuanLyDonHang extends Fragment {
                 if (documentSnapshot.exists()) {
                     String userData = documentSnapshot.getString("email"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
                     // Hiển thị dữ liệu trong TextView
-                    Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Chờ Xác Nhận");
+                    Query query = Utility.HoaDonChiTiet1().whereEqualTo("email", userData).whereEqualTo("trangThai","Chờ Xác Nhận").orderBy("timestamp", Query.Direction.ASCENDING);
                     FirestoreRecyclerOptions<HoaDonChiTiet> options = new FirestoreRecyclerOptions.Builder<HoaDonChiTiet>()
                             .setQuery(query, HoaDonChiTiet.class).build();
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

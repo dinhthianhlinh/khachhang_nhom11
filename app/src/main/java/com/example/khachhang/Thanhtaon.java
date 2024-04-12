@@ -180,37 +180,40 @@ public class Thanhtaon extends AppCompatActivity implements ThanhToanAdapter.OnI
                 String adress = tvDiaChiThanhToan.getText().toString();
                 String email = tvEmail.getText().toString();
                 int tontieng = Integer.parseInt(tvTongThanhToanHoaDon.getText().toString());
-                HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(ten,email,tontieng,phone,adress,Timestamp.now(),idHoaDon,"Chờ Xác Nhận" );
-                DocumentReference documentReference3;
-                documentReference3 = Utility.HoaDonChiTiet1().document();
-                documentReference3.set(hoaDonChiTiet).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            finish();
-                        } else {
+
+                // Kiểm tra các giá trị để đảm bảo không phải là null trước khi thực hiện hành động
+                if (ten.equals("") || phone.equals("") || adress.equals("") || email.equals("")) {
+                    // Hiển thị Toast yêu cầu nhập thông tin
+                    Toast.makeText(Thanhtaon.this, "Hãy cập nhật thông tin của bạn", Toast.LENGTH_SHORT).show();
+                } else {
+                    HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet(ten, email, tontieng, phone, adress, Timestamp.now(), idHoaDon, "Chờ Xác Nhận");
+                    DocumentReference documentReference3;
+                    documentReference3 = Utility.HoaDonChiTiet1().document();
+                    documentReference3.set(hoaDonChiTiet).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                finish();
+                            } else {
+                                // Xử lý khi không thể thêm dữ liệu
+                            }
                         }
+                    });
+
+                    List<GioHang> danhSachSanPham = new ArrayList<>();
+                    for (int i = 0; i < adapter.getItemCount(); i++) {
+                        danhSachSanPham.add(adapter.getItem(i));
                     }
-                });
 
-                List<GioHang> danhSachSanPham = new ArrayList<>();
-                for (int i = 0; i < adapter.getItemCount(); i++) {
-                    danhSachSanPham.add(adapter.getItem(i));
-                }
+                    // Bây giờ bạn có thể xử lý danh sách sản phẩm theo nhu cầu của mình.
+                    // Ví dụ: thêm tất cả các sản phẩm vào hóa đơn và thực hiện thanh toán.
+                    for (GioHang gioHang : danhSachSanPham) {
+                        gioHang.setIdHoaDon(idHoaDon);
+                        onItemClick(gioHang);
+                    }
 
-                // Bây giờ bạn có thể xử lý danh sách sản phẩm theo nhu cầu của mình.
-                // Ví dụ: thêm tất cả các sản phẩm vào hóa đơn và thực hiện thanh toán.
-                for (GioHang gioHang : danhSachSanPham) {
-                    gioHang.setIdHoaDon(idHoaDon);
-                    onItemClick(gioHang);
+                    Toast.makeText(Thanhtaon.this, "Thanh Toán Thành Công", Toast.LENGTH_SHORT).show();
                 }
-                List<HoaDon> danhSachSanPham1 = new ArrayList<>();
-                danhSachSanPham.clear();
-                if(ten.equals("") || phone.equals("") || adress.equals("")){
-                    Utility.showToast(Thanhtaon.this,"Hãy cập nhật thông tin của bạn");
-                }
-                Toast.makeText(Thanhtaon.this, "Thanh Toán Thành Công", Toast.LENGTH_SHORT).show();
-
             }
         });
 

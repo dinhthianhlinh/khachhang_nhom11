@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -114,6 +115,7 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
 
                         String userData = documentSnapshot.getString("trangThai"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
                         if (userData.equals("Đang Giao")){
+                            btnHuy.setVisibility(View.VISIBLE);
                             btnHuy.setText("Đã Nhận");
                             btnHuy.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -124,6 +126,8 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
                                                 Toast.makeText(HoaDonChiTietActivity.this, "Đã Nhận Đơn Hàng", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(HoaDonChiTietActivity.this,trangchumenu.class);
+                                                startActivity(intent);
                                             }
                                         }
                                     });
@@ -153,6 +157,7 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
 
                         String userData = documentSnapshot.getString("trangThai"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
                         if (userData.equals("Chờ Xác Nhận")){
+                            btnHuy.setVisibility(View.VISIBLE);
                             btnHuy.setText("Hủy Đơn Hàng");
                             btnHuy.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -164,6 +169,8 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
                                             if(task.isSuccessful()){
 
                                                 Toast.makeText(HoaDonChiTietActivity.this, "Đã Hủy", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(HoaDonChiTietActivity.this,trangchumenu.class);
+                                                startActivity(intent);
                                             }
 //                                            Intent intent = new Intent(HoaDonChiTietActivity.this, .class);
 //                                            startActivity(intent);

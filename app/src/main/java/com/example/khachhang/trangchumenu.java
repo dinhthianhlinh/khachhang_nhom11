@@ -82,12 +82,14 @@ public class trangchumenu extends AppCompatActivity {
                 if (documentSnapshot.exists()) {
                     // Lấy dữ liệu từ tài liệu người dùng
                     String userData = documentSnapshot.getString("ten"); // Thay "fieldName" bằng tên trường cần lấy dữ liệu
-                    // Hiển thị dữ liệu trong TextView
-                    if(userData.equals("null")){
-                        tvHl.setText("Xin Chào");
-                    }else{
-                        tvHl.setText("Xin Chào  " + userData);
 
+                    // Kiểm tra nếu userData không null và không rỗng
+                    if (userData != null && !userData.isEmpty()) {
+                        // Hiển thị dữ liệu trong TextView
+                        tvHl.setText("Xin Chào  " + userData);
+                    } else {
+                        // userData là null hoặc rỗng, set text là "Xin Chào"
+                        tvHl.setText("Xin Chào");
                     }
                 } else {
                     // Tài liệu không tồn tại

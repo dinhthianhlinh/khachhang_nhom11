@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 public class Profile extends Fragment {
     //123
     ImageView profilePic;
@@ -41,10 +42,6 @@ public class Profile extends Fragment {
         updateProfileBtn = view.findViewById(R.id.profle_update_btn);
         logoutBtn = view.findViewById(R.id.logout_btn);
         getUserName();
-        logoutBtn.setOnClickListener((v)-> {
-                    Intent intent = new Intent(getContext(), LoginActivity.class);
-                    startActivity(intent);
-                });
         updateProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +66,22 @@ public class Profile extends Fragment {
                     }
                 });
             }
+        });
+        logoutBtn.setOnClickListener((v)->{
+            FirebaseMessaging.getInstance().deleteToken().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        Utility.logout();
+                        Intent intent = new Intent(getContext(),LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                }
+            });
+
+
+
         });
 
         return view;

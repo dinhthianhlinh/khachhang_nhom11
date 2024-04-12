@@ -43,7 +43,7 @@ public class HoaDonAdapter extends FirestoreRecyclerAdapter<HoaDonChiTiet, HoaDo
                 // Chuyển dữ liệu của sản phẩm được chọn qua Intent
                 intent.putExtra("GioHang", model);
                 String docID = getSnapshots().getSnapshot(position).getId();
-//                intent.putExtra("docID",docID);
+                intent.putExtra("docID",docID);
 
                 // Mở Activity chi tiết sản phẩm
                 context.startActivity(intent);
